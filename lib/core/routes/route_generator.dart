@@ -20,18 +20,19 @@ abstract class RoutesManager {
                 BlocProvider(create: (_) => sl<SearchBloc>(), child: Search()),
           );
         }
+      case AppRoutes.main:
+        {
+          return CupertinoPageRoute(
+              builder: (context) => MainLayout());
+        }
       case AppRoutes.browse:
         {
           return CupertinoPageRoute(
             builder: (_) =>
-                BlocProvider(create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()), child: Browse()),
+                BlocProvider(create: (_) =>
+                sl<BrowseBloc>()..add(LoadMovieEvent()), child: Browse()),
           );
-      case AppRoutes.main:
-        {
-          return CupertinoPageRoute(
-            builder: (context) => MainLayout());
         }
-
     }
     return null;
   }
