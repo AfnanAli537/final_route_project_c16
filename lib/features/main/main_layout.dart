@@ -1,4 +1,12 @@
+import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
+import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
+import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../core/di/di.dart';
+import '../browser/presentation/view_model/bloc/browse_bloc.dart';
+import '../browser/presentation/view_model/bloc/browse_event.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -12,8 +20,9 @@ class MainLayoutState extends State<MainLayout> {
 
   final List<Widget> _pages = [
     Center(child: Text('Home Page')),
-    Center(child: Text('Search Page')),
-    Center(child: Text('Explore Page')),
+    BlocProvider(create: (_) => sl<SearchBloc>(), child: Search()),
+    BlocProvider(create: (_) =>
+    sl<BrowseBloc>()..add(LoadMovieEvent()), child: Browse()),
     Center(child: Text('Profile Page')),
   ];
 
