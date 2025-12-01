@@ -3,6 +3,7 @@ import 'package:final_route_projcet_c16/features/browser/presentation/view/brows
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/main_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +26,10 @@ abstract class RoutesManager {
             builder: (_) =>
                 BlocProvider(create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()), child: Browse()),
           );
+      case AppRoutes.main:
+        {
+          return CupertinoPageRoute(
+            builder: (context) => MainLayout());
         }
 
     }
