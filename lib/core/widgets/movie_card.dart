@@ -28,12 +28,11 @@ class MovieCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.r),
             color: ColorManager.border.withOpacity(0.7),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            spacing: 6.sp,
+          child:Row(   mainAxisSize: MainAxisSize.min,
+            spacing: 4.sp,
             children: [
               Text(ratingText, style: Theme.of(context).textTheme.bodyLarge),
-              Icon(Icons.star, color: ColorManager.secondary),
+              Icon(Icons.star, color: ColorManager.secondary,size: 18),
             ],
           ),
         ),

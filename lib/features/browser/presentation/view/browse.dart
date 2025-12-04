@@ -1,7 +1,7 @@
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_state.dart';
-import 'package:final_route_projcet_c16/features/search/presentation/widgets/movie_card.dart';
+import 'package:final_route_projcet_c16/core/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
