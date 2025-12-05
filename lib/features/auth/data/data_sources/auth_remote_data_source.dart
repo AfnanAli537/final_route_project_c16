@@ -55,7 +55,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Map<String, dynamic>> register(RegisterParams params) async {
     try {
       final requestData = params.toJson();
-      print('Registration data being sent: $requestData'); // Debug log
+      print('Registration data being sent: $requestData'); 
 
       final response = await dio.post(
         'auth/register',
@@ -63,7 +63,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       if (response.data is Map<String, dynamic>) {
-        print('Registration response: ${response.data}'); // Debug log
+        print('Registration response: ${response.data}'); 
         return response.data;
       } else {
         throw Exception('Invalid response format');
@@ -79,7 +79,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Map<String, dynamic>> getUserProfile() async {
     try {
-      // Get the auth token for authorization
       final token = await SessionService.getAuthToken();
 
       if (token == null) {
@@ -111,7 +110,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<String> updateProfile(Map<String, dynamic> profileData) async {
     try {
-      // Get the auth token for authorization
       final token = await SessionService.getAuthToken();
 
       if (token == null) {

@@ -18,29 +18,25 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkAppState() async {
-    // Wait for splash animation
     await Future.delayed(const Duration(seconds: 2));
 
     if (!mounted) return;
 
     final appState = await SessionService.getAppLaunchState();
-    print('App launch state: $appState'); // Debug log
+    print('App launch state: $appState'); 
 
     switch (appState) {
       case AppLaunchState.authenticated:
-        // User is logged in, go to home
         print('Navigating to home - user authenticated');
         Navigator.pushReplacementNamed(context, AppRoutes.home);
         break;
 
       case AppLaunchState.needsAuth:
-        // Onboarding completed, needs login/register
         print('Navigating to login - needs authentication');
         Navigator.pushReplacementNamed(context, AppRoutes.login);
         break;
 
       case AppLaunchState.needsOnboarding:
-        // First time user, show onboarding
         print('Navigating to onboarding - first time user');
         Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
         break;
@@ -55,7 +51,6 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Middle Logo
             Image.asset(
               "assets/images/app_logo.png",
               width: 140,
@@ -65,13 +60,11 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
 
-      // Bottom Section
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Route Logo
             Image.asset(
               "assets/images/branding_image.png",
               height: 40,
@@ -79,7 +72,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
             const SizedBox(height: 6),
 
-            // Text under logo
             const Text(
               "Supervised by Mohamed Nabil",
               style: TextStyle(

@@ -36,7 +36,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       },
       child: BlocConsumer<OnboardingBloc, OnboardingState>(
         listener: (context, state) {
-          // Sync page controller with bloc state
           if (_pageController.hasClients &&
               _pageController.page?.round() != state.currentPage) {
             _pageController.animateToPage(
@@ -96,14 +95,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             backgroundColor: const Color(0xFF0A0A0A),
             body: Stack(
               children: [
-                // PageView for onboarding screens
                 PageView.builder(
                   controller: _pageController,
                   itemCount: state.items.length,
                   onPageChanged: (index) {
-                    // Update BLoC state when user swipes
                     if (index != state.currentPage) {
-                      // Determine if user swiped forward or backward
                       if (index > state.currentPage) {
                         context.read<OnboardingBloc>().add(NextPage());
                       } else {
@@ -117,16 +113,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   },
                 ),
 
-                // Skip button
                 if (state.currentPage < state.items.length - 1)
                   Positioned(
                     top: 50,
                     right: 20,
                     child: TextButton(
                       onPressed: () async {
-                        // Mark onboarding as completed and skip to login
                         await SessionService.markOnboardingCompleted();
-                        print('Onboarding marked as completed'); // Debug log
+                        print('Onboarding marked as completed'); 
                         if (context.mounted) {
                           Navigator.pushReplacementNamed(context, AppRoutes.login);
                         }
@@ -150,25 +144,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildOnboardingPage(BuildContext context, item, int index, int totalPages) {
-    // First screen has different layout
     if (index == 0) {
       return Stack(
         children: [
-          // Background image with full screen
           Positioned.fill(
             child: Image.asset(
               item.image,
               fit: BoxFit.cover,
             ),
           ),
-          // Overlay image
           Positioned.fill(
             child: Image.asset(
               item.overlay,
               fit: BoxFit.cover,
             ),
           ),
-          // Content (text and button) on top of the image and overlay
           Positioned(
             left: 0,
             right: 0,
@@ -178,7 +168,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // Main Text (Heading)
                   Text(
                     item.text,
                     style: const TextStyle(
@@ -189,7 +178,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 10),
-                  // SubText (Description)
                   Text(
                     item.subText,
                     style: const TextStyle(
@@ -199,7 +187,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 30),
-                  // Explore Now Button
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: SizedBox(
@@ -233,7 +220,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ],
       );
     } else {
-      // Screens 2-6 have the bottom container design
       return Stack(
         children: [
           Positioned.fill(
@@ -296,9 +282,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           if (index < totalPages - 1) {
                             context.read<OnboardingBloc>().add(NextPage());
                           } else {
-                            // Last screen - mark onboarding completed and navigate to login
                             await SessionService.markOnboardingCompleted();
-                            print('Onboarding completed (last screen)'); // Debug log
+                            print('Onboarding completed (last screen)'); 
                             Navigator.pushReplacementNamed(context, AppRoutes.login);
                           }
                         },

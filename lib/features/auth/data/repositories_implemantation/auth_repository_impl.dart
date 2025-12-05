@@ -14,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     final result = await remoteDataSource.login(email: email, password: password);
-    return result.token; // ده الـ JWT token
+    return result.token; 
   }
   @override
   Future<Map<String, dynamic>> register(RegisterParams params) {

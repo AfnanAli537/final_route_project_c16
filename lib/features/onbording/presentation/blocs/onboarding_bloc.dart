@@ -45,12 +45,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   }
 
   void _onSkipOnboarding(SkipOnboarding event, Emitter<OnboardingState> emit) {
-    // Skip to the last page
     emit(state.copyWith(currentPage: state.items.length - 1));
   }
 
   void _onCompleteOnboarding(CompleteOnboarding event, Emitter<OnboardingState> emit) {
-    // Onboarding completed - this can be used to navigate or mark as completed
     emit(state.copyWith(currentPage: state.items.length - 1));
   }
 }

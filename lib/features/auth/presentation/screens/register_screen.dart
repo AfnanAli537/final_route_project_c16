@@ -65,13 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
           child: Column(
             children: [
-              const SizedBox(height: 10),
-
-              const Text(
-                "Avatar",
-                style: TextStyle(color: Colors.white, fontSize: 17),
-              ),
-              const SizedBox(height: 12),
+             
 
               SizedBox(
                 height: 100,
@@ -105,11 +99,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
               ),
+ const SizedBox(height: 10),
 
+              const Text(
+                "Avatar",
+                style: TextStyle(color: Colors.white, fontSize: 17),
+              ),
+              const SizedBox(height: 12),
               const SizedBox(height: 25),
 
               /// Input Fields
-              buildTextField(icon: Icons.person_2_outlined, hint: "Name", controller: nameController),
+              buildTextField(icon: Icons.perm_identity, hint: "Name", controller: nameController),
               const SizedBox(height: 20),
               buildTextField(icon: Icons.email_outlined, hint: "Email", controller: emailController),
               const SizedBox(height: 20),
@@ -268,7 +268,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  /// COMMON UI INPUTS
   Widget buildTextField({
     required IconData icon,
     required String hint,

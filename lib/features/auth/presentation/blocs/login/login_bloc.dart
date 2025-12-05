@@ -25,17 +25,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         password: event.password,
       );
 
-      // Store the auth token
       print('About to save token to SessionService...');
       await SessionService.setAuthToken(token);
       print('Token saved successfully: ${token.substring(0, 20)}...');
 
-      // Verify token was saved by reading it back
       final savedToken = await SessionService.getAuthToken();
       print('Verification - saved token: ${savedToken != null ? savedToken.substring(0, 20) + "..." : "null"}');
 
-      // Profile data will be fetched when needed from the home screen
-      // No local storage needed
 
       print('Login successful, emitting loginSuccess: true');
       emit(state.copyWith(isLoading: false, token: token, loginSuccess: true));
