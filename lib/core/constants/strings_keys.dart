@@ -1,5 +1,5 @@
 class StringKeys {
-  /// SharedPreferences
+  // Application Constants
   static const String languageKey = 'language_code';
   static const String tokenKey = 'token';
   static const String expireData = 'ExpireData';
