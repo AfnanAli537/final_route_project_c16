@@ -3,36 +3,6 @@ import 'package:final_route_projcet_c16/features/main/home/domain/entities/movie
 import 'package:final_route_projcet_c16/features/main/home/domain/repositories_interface/remote_movies_repo.dart';
 import 'package:injectable/injectable.dart';
 
-// @LazySingleton(as: MoviesRepository)
-// class MoviesRepositoryImpl implements MoviesRepository {
-
-
-//   final MoviesRepository remote;
-
-//   MoviesRepositoryImpl(this.remote);
-
-//   @override
-//   Future<List<Movie>> getMovies({
-//     String? genre,
-//     int limit = 20,
-//     int? minRating,
-//     int page = 1,
-//     String? query,
-//     String? sortBy,
-//   }) async {
-//     return remote.getMovies(
-//       limit: limit,
-//       page: page,
-//       genre: genre,
-//       sortBy: sortBy??= "date_added",
-
-//     );
-//   }
-  
-
-// }
-
-
 @LazySingleton(as: MoviesRepository)
 class MoviesRepositoryImpl implements MoviesRepository {
   final MoviesRemoteDataSource  remote;

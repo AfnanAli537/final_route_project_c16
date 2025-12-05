@@ -1,5 +1,3 @@
-
-
 part of 'home_bloc.dart';
 
 class MoviesState extends Equatable {

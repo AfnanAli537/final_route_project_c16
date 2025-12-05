@@ -24,14 +24,10 @@ import 'package:final_route_projcet_c16/features/browser/domain/use_cases/browse
     as _i147;
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart'
     as _i465;
-import 'package:final_route_projcet_c16/features/main/home/data/data_sources/movies_local_data_source.dart'
-    as _i31;
 import 'package:final_route_projcet_c16/features/main/home/data/data_sources/movies_remote_data_source.dart'
     as _i40;
 import 'package:final_route_projcet_c16/features/main/home/data/repositories_implemantation/movies_repo_imp.dart'
     as _i488;
-import 'package:final_route_projcet_c16/features/main/home/domain/repositories_interface/local_movies_repo.dart'
-    as _i184;
 import 'package:final_route_projcet_c16/features/main/home/domain/repositories_interface/remote_movies_repo.dart'
     as _i746;
 import 'package:final_route_projcet_c16/features/main/home/domain/use_cases/get_movies_usecase.dart'
@@ -68,9 +64,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i361.Dio>(() => registerModule.dio);
     gh.lazySingleton<_i1059.BrowseRemoteDS>(() => _i330.BrowserRemoteDSImpl());
-    gh.lazySingleton<_i184.HomeLocalDataSource>(
-      () => _i31.HomeLocalDataSourceImpl(gh<_i460.SharedPreferences>()),
-    );
     gh.lazySingleton<_i759.ApiClient>(() => _i759.ApiClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i40.MoviesRemoteDataSource>(
       () => _i40.MoviesRemoteDataSourceImpl(gh<_i759.ApiClient>()),
@@ -97,10 +90,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i322.SearchMoviesUseCase(gh<_i945.SearchRepo>()),
     );
     gh.factory<_i232.MoviesBloc>(
-      () => _i232.MoviesBloc(
-        gh<_i645.GetMoviesUseCase>(),
-        gh<_i184.HomeLocalDataSource>(),
-      ),
+      () => _i232.MoviesBloc(gh<_i645.GetMoviesUseCase>()),
     );
     gh.factory<_i465.BrowseBloc>(
       () => _i465.BrowseBloc(gh<_i147.BrowseMoviesUseCase>()),
