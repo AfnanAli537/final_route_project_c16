@@ -1,6 +1,8 @@
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/home/presentation/view/home_screen.dart';
+import 'package:final_route_projcet_c16/features/main/home/presentation/view_model/bloc/home_bloc.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
 import 'package:final_route_projcet_c16/features/main/main_layout.dart';
@@ -24,6 +26,12 @@ abstract class RoutesManager {
         {
           return CupertinoPageRoute(
               builder: (context) => MainLayout());
+        }
+         case AppRoutes.home:
+        {
+          return CupertinoPageRoute(
+              builder: (_) =>
+                BlocProvider(create: (_) => sl<MoviesBloc>(), child: HomeScreen()),);
         }
       case AppRoutes.browse:
         {

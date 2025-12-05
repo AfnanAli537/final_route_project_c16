@@ -1,16 +1,18 @@
 
 import 'package:dio/dio.dart';
-
-import 'network_config.dart';
-
+import 'package:injectable/injectable.dart';
+@lazySingleton
 class ApiClient {
-  final Dio _dio = Dio(
-    BaseOptions(
-      baseUrl: NetworkConfig.baseUrl,
-      connectTimeout: NetworkConfig.timeout,
-      receiveTimeout: NetworkConfig.timeout,
-    ),
-  );
+  // final Dio _dio = Dio(
+  //   BaseOptions(
+  //     baseUrl: NetworkConfig.baseUrl,
+  //     connectTimeout: NetworkConfig.timeout,
+  //     receiveTimeout: NetworkConfig.timeout,
+  //   ),
+  // ); 
+  final Dio _dio;
+
+  ApiClient(this._dio);
 
   Future<Response> get(String endpoint, {Map<String, dynamic>? params}) async {
     return await _dio.get(endpoint, queryParameters: params);

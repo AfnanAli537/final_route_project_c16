@@ -1,9 +1,9 @@
 class Movie {
   final int id;
   final String title;
-  final String image;
-  final num rating;
-  final List<String> genres;
+  final String? image;
+  final double? rating;
+  final List<dynamic>? genres;
 
   Movie({
     required this.id,
@@ -12,6 +12,4 @@ class Movie {
     required this.rating,
     required this.genres,
   });
-
-  static fromJson(e) {}
 }
