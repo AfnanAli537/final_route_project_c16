@@ -1,4 +1,5 @@
 import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
+import 'package:final_route_projcet_c16/features/profile/presentation/view/profile.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class MainLayoutState extends State<MainLayout> {
     BlocProvider(create: (_) => sl<SearchBloc>(), child: Search()),
     BlocProvider(create: (_) =>
     sl<BrowseBloc>()..add(LoadMovieEvent()), child: Browse()),
-    Center(child: Text('Profile Page')),
+    Profile(),
   ];
 
   @override

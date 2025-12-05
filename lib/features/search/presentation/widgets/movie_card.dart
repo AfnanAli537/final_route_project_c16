@@ -19,7 +19,7 @@ class MovieCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(16.r),
-          child: Image.network(imageNetwork),
+          child: Image.network(imageNetwork, fit: BoxFit.fill),
         ),
         Container(
           padding: REdgeInsets.symmetric(horizontal: 7, vertical: 5),

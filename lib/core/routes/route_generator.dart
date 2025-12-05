@@ -4,6 +4,7 @@ import 'package:final_route_projcet_c16/features/browser/presentation/view_model
 import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
 import 'package:final_route_projcet_c16/features/main/main_layout.dart';
+import 'package:final_route_projcet_c16/features/update_profile/presentation/view/update_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +26,12 @@ abstract class RoutesManager {
           return CupertinoPageRoute(
               builder: (context) => MainLayout());
         }
+      case AppRoutes.updateProfile:
+        {
+          return CupertinoPageRoute(
+              builder: (context) => UpdateProfile());
+        }
+
       case AppRoutes.browse:
         {
           return CupertinoPageRoute(
