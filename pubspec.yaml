@@ -38,7 +38,33 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/images/app_logo.png
+    - assets/images/branding_image.png
+    - assets/images/first_image.png
+    - assets/images/second_image.png
+    - assets/images/third_image.png
+    - assets/images/fourth_image.png
+    - assets/images/fifth_image.png
+    - assets/images/sixth_image.png
+    - assets/images/first_overlay.png
+    - assets/images/second_overlay.png
+    - assets/images/third_overlay.png
+    - assets/images/fourth_overlay.png
+    - assets/images/fifth_overlay.png
+    - assets/images/sixth_overlay.png
+    - assets/images/google.png
+    - assets/images/flag_usa.png
+    - assets/images/flag_egypt.png
+    - assets/images/avatar1.png
+    - assets/images/avatar2.png
+    - assets/images/avatar3.png
+    - assets/images/avatar4.png
+    - assets/images/avatar5.png
+    - assets/images/avatar6.png
+    - assets/images/avatar7.png
+    - assets/images/avatar8.png
+    - assets/images/avatar9.png
+
     - assets/icons/
     - assets/svg/
     - assets/lottie/
@@ -49,4 +75,5 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/images/app_logo.png"
+
 

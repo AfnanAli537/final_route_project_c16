@@ -1,3 +1,5 @@
+import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
+import 'package:final_route_projcet_c16/core/routes/route_generator.dart';
 import 'package:final_route_projcet_c16/core/theme/theme_manager.dart';
 import 'package:final_route_projcet_c16/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -9,25 +11,25 @@ class Movies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- return ScreenUtilInit(
-      designSize: Size(393, 841),
-      splitScreenMode: true,
-      minTextAdapt: true,
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // onGenerateRoute: RoutesManger.router,
-        // initialRoute: ,
-        theme:  ThemeManager.darkTheme,
-     localizationsDelegates: const [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: S.delegate.supportedLocales,
-                locale: null,
-      ),
+return ScreenUtilInit(
+  designSize: const Size(393, 841),
+  minTextAdapt: true,
+  splitScreenMode: true,
+  builder: (context, child) => MaterialApp(
+    debugShowCheckedModeBanner: false,
+    onGenerateRoute: RoutesManager.router,
+    initialRoute: AppRoutes.splash,
+    theme: ThemeManager.darkTheme,
 
-    );
+    localizationsDelegates: const [
+      S.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+  ),
+);
+
   }
 }
