@@ -67,14 +67,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               const SizedBox(height: 10),
 
-              /// Avatar Title
               const Text(
                 "Avatar",
                 style: TextStyle(color: Colors.white, fontSize: 17),
               ),
               const SizedBox(height: 12),
 
-              /// Avatar List (Horizontal)
               SizedBox(
                 height: 100,
                 child: ListView.separated(
@@ -112,14 +110,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               /// Input Fields
               buildTextField(icon: Icons.person_2_outlined, hint: "Name", controller: nameController),
-              const SizedBox(height: 15),
+              const SizedBox(height: 20),
               buildTextField(icon: Icons.email_outlined, hint: "Email", controller: emailController),
-              const SizedBox(height: 15),
+              const SizedBox(height: 20),
               buildPasswordField(passwordController, "Password"),
-              const SizedBox(height: 15),
+              const SizedBox(height: 20),
               buildPasswordField(confirmPasswordController, "Confirm Password"),
-              const SizedBox(height: 15),
-              buildTextField(icon: Icons.phone_android, hint: "Phone Number (+20XXXXXXXXXX)", controller: phoneController),
+              const SizedBox(height: 20),
+              buildTextField(icon: Icons.phone, hint: "Phone Number (+20XXXXXXXXXX)", controller: phoneController),
               Padding(
                 padding: const EdgeInsets.only(left: 40, top: 5),
                 child: Text(
@@ -157,7 +155,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: CircularProgressIndicator(color: Color(0xFFF6BD00)))
                         : ElevatedButton(
                             onPressed: () {
-                              // Basic validation
                               final name = nameController.text.trim();
                               final email = emailController.text.trim();
                               final password = passwordController.text.trim();
@@ -179,7 +176,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 return;
                               }
 
-                              // Check if phone starts with +20 and has exactly 10 digits after +20
                               if (!phone.startsWith('+20') || phone.length != 13) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('Phone number must start with +20 and contain exactly 10 digits')),
@@ -187,7 +183,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 return;
                               }
 
-                              // Check that after +20, only digits remain
                               final digitsPart = phone.substring(3);
                               if (!RegExp(r'^\d{10}$').hasMatch(digitsPart)) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -247,23 +242,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               const SizedBox(height: 20),
 
-              /// Language Switch
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.white12,
-                  borderRadius: BorderRadius.circular(50),
-                
+              
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(color: Color(0xFFF6BD00)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset("assets/images/flag_usa.png", height: 22),
+                      const SizedBox(width: 25),
+                      Image.asset("assets/images/flag_egypt.png", height: 22),
+                    ],
+                  ),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset("assets/images/flag_usa.png", height: 22),
-                    const SizedBox(width: 10),
-                    Image.asset("assets/images/flag_egypt.png", height: 22),
-                  ],
-                ),
-              ),
               const SizedBox(height: 20),
             ],
           ),

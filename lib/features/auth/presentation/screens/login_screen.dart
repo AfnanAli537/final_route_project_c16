@@ -41,12 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                /// LOGO
-                const SizedBox(height: 20),
-                Image.asset("assets/images/app_logo.png", height: 120),
+                
+                Image.asset("assets/images/app_logo.png", height: 210),
                 const SizedBox(height: 30),
-
-                /// EMAIL FIELD
+              
                 _buildInputField(
                   controller: _emailController,
                   hint: "Email",
@@ -54,7 +52,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 15),
 
-                /// PASSWORD FIELD
                 _buildInputField(
                   controller: _passwordController,
                   hint: "Password",
@@ -69,7 +66,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 8),
 
-                /// FORGET PASSWORD
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -87,7 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 25),
 
-                /// LOGIN BUTTON with BLoC
                 BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
                     if (state.errorMessage != null) {
@@ -97,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
 
                     if (state.loginSuccess) {
-                      print('Login successful, navigating to home...'); // Debug log
+                      print('Login successful, navigating to home...');
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         AppRoutes.home,
@@ -146,7 +141,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 15),
 
-                /// CREATE NEW ACCOUNT
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -171,27 +165,25 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 20),
 
-                /// OR DIVIDER
                 Row(
                   children: [
                     Expanded(
-                      child: Divider(color: Colors.white38, thickness: .7),
+                      child: Divider(color: Color(0xFFF6BD00), thickness: .7),
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12),
                       child: Text(
                         "OR",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Color(0xFFF6BD00),),
                       ),
                     ),
                     Expanded(
-                      child: Divider(color: Colors.white38, thickness: .7),
+                      child: Divider(color: Color(0xFFF6BD00), thickness: .7),
                     ),
                   ],
                 ),
                 const SizedBox(height: 20),
 
-                /// GOOGLE BUTTON
                 SizedBox(
                   width: size.width,
                   height: 50,
@@ -217,20 +209,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 30),
 
-                /// LANGUAGE SWITCHER (EGYPT + USA)
                 Container(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 20, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.white12,
+                    color: Colors.black,
                     borderRadius: BorderRadius.circular(50),
-                    border: Border.all(color: Colors.white30),
+                    border: Border.all(color: Color(0xFFF6BD00)),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset("assets/images/flag_usa.png", height: 22),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 25),
                       Image.asset("assets/images/flag_egypt.png", height: 22),
                     ],
                   ),
