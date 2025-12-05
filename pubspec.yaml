@@ -18,22 +18,28 @@ dependencies:
   flutter_bloc: ^9.1.1
   shared_preferences: ^2.5.3
   smooth_page_indicator: ^1.2.00
-  get_it: ^8.2.0
+  get_it: ^9.1.1
   provider: ^6.1.5+1
-  flutter_localizations:
-    sdk: flutter
-  intl: ^0.20.2
+  # flutter_localizations:
+  #   sdk: flutter
+  # intl: ^0.20.2
   image_picker: ^1.2.0
   dio: ^5.9.0
   flutter_svg: ^2.2.1
   equatable: ^2.0.7
   google_sign_in: ^6.0.4
+  injectable: ^2.7.0
+  carousel_slider: ^5.1.1
+  connectivity_plus: ^7.0.0
+  internet_connection_checker_plus: ^2.9.1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  injectable_generator:
+  build_runner:
 
 flutter:
   uses-material-design: true
@@ -68,8 +74,8 @@ flutter:
     - assets/icons/
     - assets/svg/
     - assets/lottie/
-flutter_intl:
-  enabled: true
+# flutter_intl:
+#   enabled: true
 
 flutter_launcher_icons:
   android: true

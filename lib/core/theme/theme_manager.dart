@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ThemeManager {
   static ThemeData darkTheme = ThemeData(
@@ -20,68 +22,69 @@ class ThemeManager {
       onError: ColorManager.textPrimary,
     ),
     /// TEXT THEME (EXPANDED)
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       // Titles in Movies App (Movie Name, Headings)
-      displayLarge: TextStyle(
+      displayLarge: const TextStyle(
         color: ColorManager.textPrimary,
         fontSize: 32,
         fontWeight: FontWeight.bold,
       ),
-      displayMedium: TextStyle(
+      displayMedium: const TextStyle(
         color: ColorManager.textPrimary,
         fontSize: 28,
         fontWeight: FontWeight.bold,
       ),
-      displaySmall: TextStyle(
+      displaySmall: const TextStyle(
         color: ColorManager.textPrimary,
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),
 
       // Section Titles (Popular Movies, Trending)
-      headlineLarge: TextStyle(
+      headlineLarge: const TextStyle(
         color: ColorManager.textPrimary,
         fontSize: 22,
         fontWeight: FontWeight.w700,
       ),
-      headlineMedium: TextStyle(
+      headlineMedium: const TextStyle(
         color: ColorManager.textPrimary,
         fontSize: 20,
         fontWeight: FontWeight.w600,
       ),
-      headlineSmall: TextStyle(
+      headlineSmall: const TextStyle(
         color: ColorManager.textPrimary,
         fontSize: 18,
         fontWeight: FontWeight.w600,
       ),
 
       // Body Text (Descriptions, Movie summaries)
-      bodyLarge: TextStyle(
+        bodyLarge: GoogleFonts.roboto(
         color: ColorManager.textPrimary,
-        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        fontSize: 16.sp,
       ),
-      bodyMedium: TextStyle(
+      bodyMedium: const TextStyle(
         color: ColorManager.textSecondary,
         fontSize: 14,
       ),
-      bodySmall: TextStyle(
+      bodySmall: const TextStyle(
         color: ColorManager.textSecondary,
         fontSize: 12,
       ),
 
       // Button Text
-      labelLarge: TextStyle(
+      labelLarge: const TextStyle(
         color: ColorManager.textPrimary,
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
 
       // Small labels (genre badges, tab labels)
-      labelMedium: TextStyle(
+      labelMedium: const TextStyle(
         color: ColorManager.textSecondary,
         fontSize: 13,
       ),
-      labelSmall: TextStyle(
+      labelSmall: const TextStyle(
         color: ColorManager.textSecondary,
         fontSize: 11,
       ),
