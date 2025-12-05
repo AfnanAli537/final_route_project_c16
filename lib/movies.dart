@@ -9,17 +9,17 @@ class Movies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- return ScreenUtilInit(
-      designSize: Size(393, 841),
-      splitScreenMode: true,
-      minTextAdapt: true,
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute:RoutesManager.router,
-        initialRoute:AppRoutes.main,
-        theme:  ThemeManager.darkTheme,
-      ),
+return ScreenUtilInit(
+  designSize: const Size(393, 841),
+  minTextAdapt: true,
+  splitScreenMode: true,
+  builder: (context, child) => MaterialApp(
+    debugShowCheckedModeBanner: false,
+    onGenerateRoute: RoutesManager.router,
+    initialRoute: AppRoutes.login,
+    theme: ThemeManager.darkTheme,
+  ),
+);
 
-    );
   }
 }
