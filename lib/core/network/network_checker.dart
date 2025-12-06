@@ -1,18 +1,15 @@
-import 'dart:io';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 
 class NetworkChecker {
-
-  static Future<bool> hasInternetConnection() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result.first.rawAddress.isNotEmpty) {
-        return true;
-      }
-      return false;
-    } on SocketException catch (_) {
-      return false;
+  static Future<bool> hasInternet() async {
+       try {
+      final result = await Connectivity().checkConnectivity();
+      // ignore: unrelated_type_equality_checks
+      return result != ConnectivityResult.none;
     } catch (_) {
       return false;
     }
   }
+
 }
