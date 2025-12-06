@@ -21,7 +21,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl() {
     dio = Dio(
       BaseOptions(
-        baseUrl: EndPoints.authBaseUrl,
+        baseUrl: Endpoints.authBaseUrl,
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
       ),
@@ -86,7 +86,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       final response = await dio.get(
-        EndPoints.profile,
+        Endpoints.profile,
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',
@@ -117,7 +117,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       final response = await dio.patch(
-        EndPoints.profile,
+        Endpoints.profile,
         data: profileData,
         options: Options(
           headers: {

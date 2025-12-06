@@ -33,8 +33,8 @@ class SessionService {
 
     try {
       // Try to make a simple API call to validate token
-      final apiClient = ApiClient();
-      await apiClient.dio.get(
+      final apiClient = ApiClient(Dio());
+      await apiClient.get(
         'profile',
         options: Options(
           headers: {

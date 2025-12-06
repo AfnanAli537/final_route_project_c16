@@ -65,6 +65,7 @@ abstract class RoutesManager {
         }
         default:
         return _pageRoute(const SplashScreen());
+     
     }
   }
 

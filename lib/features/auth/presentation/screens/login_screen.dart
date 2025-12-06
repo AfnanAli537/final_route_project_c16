@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       print('Login successful, navigating to home...');
                       Navigator.pushNamedAndRemoveUntil(
                         context,
-                        AppRoutes.home,
+                        AppRoutes.main,
                         (route) => false,
                       );
                     }
