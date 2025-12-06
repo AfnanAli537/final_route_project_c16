@@ -1,6 +1,8 @@
+import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/core/widgets/movie_card.dart';
 import 'package:final_route_projcet_c16/features/main/home/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GenereSection extends StatefulWidget {
  final BuildContext context;
@@ -23,33 +25,33 @@ class _GenereSectionState extends State<GenereSection> {
     return  Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding:  EdgeInsets.symmetric(horizontal: 16.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(widget.title,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
+                  style: TextStyle(
+                      color: ColorManager.white,
+                      fontSize: 22.sp,
                       fontWeight: FontWeight.bold)),
               GestureDetector(
                 onTap: () {},
                 child: Row(
-                  children: const [
-                    Text("See More", style: TextStyle(color: Colors.orange, fontSize: 16)),
+                  children:  [
+                    Text("See More", style: TextStyle(color: ColorManager.secondary, fontSize: 16.sp)),
                     SizedBox(width: 2),
-                    Icon(Icons.arrow_forward, size: 16, color: Colors.orange),
+                    Icon(Icons.arrow_forward, size: 16, color: ColorManager.secondary),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
+         SizedBox(height: 8.h),
         SizedBox(
-          height: 220,
+          height: 220.h,
           child: ListView.separated(
-            padding: const EdgeInsets.all(10),
+            padding:  EdgeInsets.all(10.h),
             scrollDirection: Axis.horizontal,
             itemCount: widget.movies?.length ?? 0,
 
@@ -59,7 +61,7 @@ class _GenereSectionState extends State<GenereSection> {
                   ratingText: movie.rating.toString(),
                   imageNetwork: movie.image??"");
             },
-            separatorBuilder: (context, index) => const SizedBox(width: 12),
+            separatorBuilder: (context, index) =>  SizedBox(width: 12.w),
           ),
         ),
       ],

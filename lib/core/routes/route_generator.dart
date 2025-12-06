@@ -16,8 +16,7 @@ import 'package:final_route_projcet_c16/features/main/home/presentation/view_mod
 import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
 import 'package:final_route_projcet_c16/features/main/main_layout.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 import '../../features/browser/presentation/view_model/bloc/browse_event.dart';
 import '../di/di.dart';

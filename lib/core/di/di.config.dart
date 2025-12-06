@@ -24,6 +24,8 @@ import 'package:final_route_projcet_c16/features/browser/domain/use_cases/browse
     as _i147;
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart'
     as _i465;
+import 'package:final_route_projcet_c16/features/main/home/data/data_sources/data_sources.dart'
+    as _i1033;
 import 'package:final_route_projcet_c16/features/main/home/data/data_sources/movies_remote_data_source.dart'
     as _i40;
 import 'package:final_route_projcet_c16/features/main/home/data/repositories_implemantation/movies_repo_imp.dart'
@@ -65,9 +67,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(() => registerModule.dio);
     gh.lazySingleton<_i1059.BrowseRemoteDS>(() => _i330.BrowserRemoteDSImpl());
     gh.lazySingleton<_i759.ApiClient>(() => _i759.ApiClient(gh<_i361.Dio>()));
-    gh.lazySingleton<_i40.MoviesRemoteDataSource>(
-      () => _i40.MoviesRemoteDataSourceImpl(gh<_i759.ApiClient>()),
-    );
     gh.lazySingleton<_i798.SearchRemoteDataSource>(
       () => _i239.SearchRemoteDataSourceImpl(gh<_i759.ApiClient>()),
     );
@@ -77,26 +76,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i858.BrowserRepo>(
       () => _i380.BrowserRepoImpl(gh<_i1059.BrowseRemoteDS>()),
     );
-    gh.lazySingleton<_i746.MoviesRepository>(
-      () => _i488.MoviesRepositoryImpl(gh<_i40.MoviesRemoteDataSource>()),
-    );
-    gh.factory<_i645.GetMoviesUseCase>(
-      () => _i645.GetMoviesUseCase(gh<_i746.MoviesRepository>()),
-    );
     gh.factory<_i147.BrowseMoviesUseCase>(
       () => _i147.BrowseMoviesUseCase(gh<_i858.BrowserRepo>()),
     );
     gh.factory<_i322.SearchMoviesUseCase>(
       () => _i322.SearchMoviesUseCase(gh<_i945.SearchRepo>()),
     );
-    gh.factory<_i232.MoviesBloc>(
-      () => _i232.MoviesBloc(gh<_i645.GetMoviesUseCase>()),
+    gh.lazySingleton<_i1033.MoviesDataSource>(
+      () => _i40.MoviesRemoteDataSource(gh<_i759.ApiClient>()),
+    );
+    gh.lazySingleton<_i746.MoviesRepository>(
+      () => _i488.MoviesRepositoryImpl(gh<_i1033.MoviesDataSource>()),
     );
     gh.factory<_i465.BrowseBloc>(
       () => _i465.BrowseBloc(gh<_i147.BrowseMoviesUseCase>()),
     );
     gh.factory<_i659.SearchBloc>(
       () => _i659.SearchBloc(gh<_i322.SearchMoviesUseCase>()),
+    );
+    gh.factory<_i645.GetMoviesUseCase>(
+      () => _i645.GetMoviesUseCase(gh<_i746.MoviesRepository>()),
+    );
+    gh.factory<_i232.MoviesBloc>(
+      () => _i232.MoviesBloc(gh<_i645.GetMoviesUseCase>()),
     );
     return this;
   }

@@ -13,7 +13,7 @@ class MovieModel extends Movie {
         id: json['id']?? 0,
         title: json['title'] ??"",
         image: json['medium_cover_image']??"",
-        rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+        rating: json['rating'] ?.toDouble() ?? 0.0,
         genres: json['genres'] ?? [],
       );
 

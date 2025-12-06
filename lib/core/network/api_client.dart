@@ -2,13 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 @lazySingleton
 class ApiClient {
-  // final Dio _dio = Dio(
-  //   BaseOptions(
-  //     baseUrl: NetworkConfig.baseUrl,
-  //     connectTimeout: NetworkConfig.timeout,
-  //     receiveTimeout: NetworkConfig.timeout,
-  //   ),
-  // ); 
   final Dio _dio;
 
   ApiClient(this._dio);

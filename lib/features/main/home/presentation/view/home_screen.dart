@@ -6,24 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
-  @override
-  void initState() {
-    super.initState();
-    context.read<MoviesBloc>().add(LoadAvailableMovies());
-    context.read<MoviesBloc>().add(LoadMoviesByGenre("action"));
-    context.read<MoviesBloc>().add(LoadMoviesByGenre("animation"));
-  }
-  @override
   Widget build(BuildContext context) {
+    context.read<MoviesBloc>().add(LoadAvailableMovies());
+    // context.read<MoviesBloc>().add(LoadMoviesByGenre("action"));
+    // context.read<MoviesBloc>().add(LoadMoviesByGenre("animation"));
     return Scaffold(
       body: BlocConsumer<MoviesBloc, MoviesState>(
         listener: (context, state) {
@@ -38,13 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         builder: (context, state) {
           final availableNow = state.availableNow;
+          final currentIndex = 0;
           final bgImage = availableNow.isNotEmpty
-              ? availableNow[_currentIndex].image
+              ? availableNow[currentIndex].image
               : '';
-
-          print(
-            "AvailableNow length: ${state.availableNow.length}, isLoading: ${state.isLoading}",
-          );
 
           return Stack(
             children: [
@@ -59,9 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Color.fromRGBO(18, 19, 18, 0.8),
-                        Color.fromRGBO(18, 19, 18, 0.6),
-                        Color(0xFF121312),
+                        Color(0xff121312).withOpacity(0.8),
+                        Color(0xff121312).withOpacity(0.6),
+                        Color(0xff121312),
                       ],
                       stops: [0.0, 0.5, 1.0],
                     ),
@@ -126,9 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           Text(
                                             movie.rating.toString(),
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.bodyLarge,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
                                           ),
                                           const SizedBox(width: 4),
                                           Icon(
@@ -150,12 +137,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             enlargeCenterPage: true,
                             viewportFraction: 0.6,
                             onPageChanged: (index, reason) {
-                              setState(() => _currentIndex = index);
                               final bloc = context.read<MoviesBloc>();
                               final state = bloc.state;
                               if (index >= state.availableNow.length - 2 &&
-                                  !state.isLoadingMore &&
-                                  !state.isOffline) {
+                                  !state.isLoadingMore) {
                                 bloc.add(LoadMoreAvailableMovies());
                               }
                             },
@@ -197,3 +182,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
