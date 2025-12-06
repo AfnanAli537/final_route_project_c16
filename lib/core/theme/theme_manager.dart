@@ -24,9 +24,9 @@ class ThemeManager {
     /// TEXT THEME (EXPANDED)
     textTheme: TextTheme(
       // Titles in Movies App (Movie Name, Headings)
-      displayLarge: const TextStyle(
+      displayLarge: GoogleFonts.roboto(
         color: ColorManager.textPrimary,
-        fontSize: 32,
+        fontSize: 32.sp,
         fontWeight: FontWeight.bold,
       ),
       displayMedium: const TextStyle(
@@ -34,9 +34,9 @@ class ThemeManager {
         fontSize: 28,
         fontWeight: FontWeight.bold,
       ),
-      displaySmall: const TextStyle(
+      displaySmall: GoogleFonts.roboto(
         color: ColorManager.textPrimary,
-        fontSize: 24,
+        fontSize: 24.sp,
         fontWeight: FontWeight.bold,
       ),
 

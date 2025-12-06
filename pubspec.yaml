@@ -29,6 +29,7 @@ dependencies:
   equatable: ^2.0.7
   google_sign_in: ^6.0.4
   injectable: ^2.7.0
+  multiavatar: ^0.1.5
   carousel_slider: ^5.1.1
   connectivity_plus: ^7.0.0
   internet_connection_checker_plus: ^2.9.1

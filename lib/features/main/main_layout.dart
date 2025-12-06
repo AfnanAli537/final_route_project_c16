@@ -1,5 +1,6 @@
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
+import 'package:final_route_projcet_c16/features/profile/presentation/view/profile.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view/home_screen.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view_model/bloc/home_bloc.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
@@ -26,11 +27,13 @@ class MainLayoutState extends State<MainLayout> {
       child: HomeScreen(),
     ),
     BlocProvider(create: (_) => sl<SearchBloc>(), child: Search()),
+    BlocProvider(create: (_) =>
+    sl<BrowseBloc>()..add(LoadMovieEvent()), child: Browse()),
+    Profile(),
     BlocProvider(
       create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()),
       child: Browse(),
     ),
-    Center(child: Text('Profile Page')),
   ];
 
   @override
