@@ -11,14 +11,8 @@ import 'package:final_route_projcet_c16/features/onbording/data/onboarding_repos
 import 'package:final_route_projcet_c16/features/onbording/domain/use_cases/get_onboarding_data_usecase.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
-import 'package:final_route_projcet_c16/features/main/home/presentation/view/home_screen.dart';
-import 'package:final_route_projcet_c16/features/main/home/presentation/view_model/bloc/home_bloc.dart';
-import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
-import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
 import 'package:final_route_projcet_c16/features/main/main_layout.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:final_route_projcet_c16/features/update_profile/presentation/view/update_profile.dart';
 import '../../features/browser/presentation/view_model/bloc/browse_event.dart';
 import '../di/di.dart';
 
@@ -36,36 +30,26 @@ abstract class RoutesManager {
 
       case AppRoutes.register:
         return _pageRoute(const RegisterScreen());
-      
-      case AppRoutes.search:
-        {
-          return CupertinoPageRoute(
-            builder: (_) =>
-                BlocProvider(create: (_) => sl<SearchBloc>(), child: Search()),
-          );
-        }
       case AppRoutes.main:
         {
-          return CupertinoPageRoute(
-              builder: (context) => MainLayout());
+          return CupertinoPageRoute(builder: (context) => MainLayout());
         }
-         case AppRoutes.home:
+      case AppRoutes.updateProfile:
         {
-          return CupertinoPageRoute(
-              builder: (_) =>
-                BlocProvider(create: (_) => sl<MoviesBloc>(), child: HomeScreen()),);
+          return CupertinoPageRoute(builder: (context) => UpdateProfile());
         }
-      case AppRoutes.browse:
-        {
-          return CupertinoPageRoute(
-            builder: (_) =>
-                BlocProvider(create: (_) =>
-                sl<BrowseBloc>()..add(LoadMovieEvent()), child: Browse()),
-          );
-        }
-        default:
+
+    case AppRoutes.browse:
+  final genre = settings.arguments as String?; 
+  return CupertinoPageRoute(
+    builder: (_) => BlocProvider(
+      create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()),
+      child: Browse(selectedGenre: genre, showBackButton: true,), 
+    ),
+  );
+
+      default:
         return _pageRoute(const SplashScreen());
-     
     }
   }
 

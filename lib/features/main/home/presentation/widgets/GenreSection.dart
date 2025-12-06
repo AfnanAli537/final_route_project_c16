@@ -1,17 +1,20 @@
+import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
+import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
 import 'package:final_route_projcet_c16/core/widgets/movie_card.dart';
 import 'package:final_route_projcet_c16/features/main/home/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GenereSection extends StatefulWidget {
- final BuildContext context;
- final String title;
- final  List<Movie>? movies;
+  final BuildContext context;
+  final String title;
+  final List<Movie>? movies;
   const GenereSection({
-  super.key,
-  required this.context,
-  required this.title,
-  required this.movies,
-});
+    super.key,
+    required this.context,
+    required this.title,
+    required this.movies,
+  });
 
   @override
   State<GenereSection> createState() => _GenereSectionState();
@@ -20,50 +23,69 @@ class GenereSection extends StatefulWidget {
 class _GenereSectionState extends State<GenereSection> {
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget.title,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold)),
+              Text(
+                widget.title,
+                style: TextStyle(
+                  color: ColorManager.white,
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.browse,
+                    arguments: widget.title,
+                  );
+                },
                 child: Row(
-                  children: const [
-                    Text("See More", style: TextStyle(color: Colors.orange, fontSize: 16)),
+                  children: [
+                    Text(
+                      "See More",
+                      style: TextStyle(
+                        color: ColorManager.secondary,
+                        fontSize: 16.sp,
+                      ),
+                    ),
                     SizedBox(width: 2),
-                    Icon(Icons.arrow_forward, size: 16, color: Colors.orange),
+                    Icon(
+                      Icons.arrow_forward,
+                      size: 16,
+                      color: ColorManager.secondary,
+                    ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         SizedBox(
-          height: 220,
+          height: 220.h,
           child: ListView.separated(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10.h),
             scrollDirection: Axis.horizontal,
             itemCount: widget.movies?.length ?? 0,
 
             itemBuilder: (context, index) {
               final movie = widget.movies![index];
               return MovieCard(
-                  ratingText: movie.rating.toString(),
-                  imageNetwork: movie.image??"");
+                ratingText: movie.rating.toString(),
+                imageNetwork: movie.image ?? "",
+              );
             },
-            separatorBuilder: (context, index) => const SizedBox(width: 12),
+            separatorBuilder: (context, index) => SizedBox(width: 12.w),
           ),
         ),
       ],
     );
-  
   }
 }

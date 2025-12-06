@@ -10,18 +10,39 @@ import 'package:google_fonts/google_fonts.dart';
 import '../view_model/bloc/browse_event.dart';
 
 class Browse extends StatefulWidget {
-  const Browse({super.key});
+  final String? selectedGenre;
+  final bool showBackButton;
+  const Browse({super.key, this.selectedGenre,  this.showBackButton= false});
 
   @override
   State<Browse> createState() => _BrowseState();
 }
 
 class _BrowseState extends State<Browse> {
-  String selectedGenre = "";
+  late String selectedGenre = "";
+
+  @override
+  void initState() {
+    super.initState();
+    selectedGenre = widget.selectedGenre ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+          appBar: widget.showBackButton
+        ? AppBar(
+            backgroundColor: ColorManager.background,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: Text(
+              selectedGenre ,
+              style: TextStyle(color: Colors.white),
+            ),
+          )
+        : null,
       body: SafeArea(
         child: BlocBuilder<BrowseBloc, BrowseState>(
           builder: (context, state) {
@@ -47,11 +68,13 @@ class _BrowseState extends State<Browse> {
               if (selectedGenre.isEmpty && genreList.isNotEmpty) {
                 selectedGenre = genreList.first;
               }
-
               final filteredMovies = movies
-                  .where((m) => m.genres.contains(selectedGenre))
+                  .where(
+                    (m) => m.genres
+                        .map((g) => g.toLowerCase())
+                        .contains(selectedGenre.toLowerCase()),
+                  )
                   .toList();
-
               return Column(
                 children: [
                   SizedBox(
@@ -68,10 +91,18 @@ class _BrowseState extends State<Browse> {
                             });
                           },
                           child: Container(
-                            margin: REdgeInsets.symmetric(horizontal: 6, vertical: 10),
-                            padding: REdgeInsets.symmetric(horizontal: 22, vertical: 8),
+                            margin: REdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 10,
+                            ),
+                            padding: REdgeInsets.symmetric(
+                              horizontal: 22,
+                              vertical: 8,
+                            ),
                             decoration: BoxDecoration(
-                              color: isSelected ? ColorManager.primary : Colors.transparent,
+                              color: isSelected
+                                  ? ColorManager.primary
+                                  : Colors.transparent,
                               borderRadius: BorderRadius.circular(14.r),
                               border: Border.all(
                                 color: ColorManager.primary,
@@ -81,7 +112,9 @@ class _BrowseState extends State<Browse> {
                             child: Text(
                               genre,
                               style: GoogleFonts.inter(
-                                color: isSelected ? ColorManager.black : ColorManager.primary,
+                                color: isSelected
+                                    ? ColorManager.black
+                                    : ColorManager.primary,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20.sp,
                               ),
@@ -98,12 +131,12 @@ class _BrowseState extends State<Browse> {
                       child: GridView.builder(
                         padding: const EdgeInsets.all(12),
                         gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: 0.65,
-                        ),
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                              childAspectRatio: 0.65,
+                            ),
                         itemCount: filteredMovies.length,
                         itemBuilder: (context, index) {
                           final movie = filteredMovies[index];
@@ -111,9 +144,9 @@ class _BrowseState extends State<Browse> {
                             ratingText: movie.rating.toString(),
                             imageNetwork: movie.image,
                           );
-                        }
+                        },
                       ),
-                    )
+                    ),
                   ),
                 ],
               );
