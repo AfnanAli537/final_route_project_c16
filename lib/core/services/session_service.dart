@@ -80,9 +80,9 @@ class SessionService {
     try {
       print('Validating token with API call...');
       // Try to make a simple API call to validate token
-      final apiClient = ApiClient();
-      final response = await apiClient.dio.get(
-        EndPoints.profile,
+      final apiClient = ApiClient(Dio());
+      final response = await apiClient.get(
+        Endpoints.profile,
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',

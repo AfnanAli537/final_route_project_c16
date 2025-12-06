@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     switch (appState) {
       case AppLaunchState.authenticated:
         print('Navigating to home - user authenticated');
-        Navigator.pushReplacementNamed(context, AppRoutes.home);
+        Navigator.pushReplacementNamed(context, AppRoutes.main);
         break;
 
       case AppLaunchState.needsAuth:
