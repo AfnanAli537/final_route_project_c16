@@ -16,7 +16,18 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     on<LoadMoreAvailableMovies>(_loadMoreMovies);
     // on<LoadMoviesByGenre>(_loadMoviesByGenre);
     on<ReloadGenres>(_reloadGenresData);
+    on<CarouselIndexChanged>(_carouselIndexChanged);
+
+
   }
+
+void _carouselIndexChanged(
+  CarouselIndexChanged event,
+  Emitter<MoviesState> emit,
+) {
+  emit(state.copyWith(currentCarouselIndex: event.index));
+}
+
 
 Future<void> _reloadGenresData(
   ReloadGenres event,

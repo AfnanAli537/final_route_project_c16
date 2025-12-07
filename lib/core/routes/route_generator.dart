@@ -1,4 +1,7 @@
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
+import 'package:final_route_projcet_c16/features/details/presentation/view/details_screen.dart';
+import 'package:final_route_projcet_c16/features/details/presentation/view_model/details_bloc/movie_details_bloc.dart';
+import 'package:final_route_projcet_c16/features/details/presentation/view_model/suggestions_bloc/movie_suggestions_bloc.dart';
 import 'package:final_route_projcet_c16/features/onbording/presentation/screens/onboarding_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +41,26 @@ abstract class RoutesManager {
         {
           return CupertinoPageRoute(builder: (context) => UpdateProfile());
         }
+    case AppRoutes.details: {
+  final movieId = settings.arguments as int;
+
+  return CupertinoPageRoute(
+    builder: (_) => MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) =>
+              sl<MovieDetailsBloc>()..add(FetchMovieDetails(movieId)),
+        ),
+        BlocProvider(
+          create: (_) =>
+              sl<MovieSuggestionsBloc>()..add(FetchSuggestions(movieId)),
+        ),
+      ],
+      child: DetailsScreen(movieId: movieId),
+    ),
+  );
+}
+
 
     case AppRoutes.browse:
   final genre = settings.arguments as String?; 

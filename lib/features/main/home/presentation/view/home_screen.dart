@@ -1,10 +1,12 @@
 // ignore_for_file: deprecated_member_use
+import 'package:final_route_projcet_c16/core/constants/assets_manager.dart';
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view_model/bloc/home_bloc.dart';
-import 'package:final_route_projcet_c16/features/main/home/presentation/widgets/GenreSection.dart';
+import 'package:final_route_projcet_c16/features/main/home/presentation/widgets/genre_section.dart';
+import 'package:final_route_projcet_c16/features/main/home/presentation/widgets/movies_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,9 +30,8 @@ class HomeScreen extends StatelessWidget {
         },
         builder: (context, state) {
           final availableNow = state.availableNow;
-          final currentIndex = 0;
           final bgImage = availableNow.isNotEmpty
-              ? availableNow[currentIndex].image
+              ? availableNow[state.currentCarouselIndex].image
               : '';
 
           return Stack(
@@ -61,11 +62,11 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(16.w),
                         child: Center(
                           child: Image.asset(
-                            "assets/images/available_now.png",
-                            width: 200,
+                            ImageAssets.availableNowImage,
+                            width: 200.w,
                           ),
                         ),
                       ),
@@ -73,98 +74,32 @@ class HomeScreen extends StatelessWidget {
                       if (availableNow.isEmpty)
                         Center(
                           child: CircularProgressIndicator(
-                            color: Colors.orange,
+                            color: ColorManager.secondary,
                           ),
                         )
                       else
-                        CarouselSlider.builder(
-                          itemCount: availableNow.length,
-                          itemBuilder: (context, index, _) {
-                            final movie = availableNow[index];
-                            return Container(
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 10,
-                              ),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Image.network(
-                                      movie.image ?? "",
-                                      fit: BoxFit.cover,
-                                      width: double.infinity,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 10,
-                                    left: 10,
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 4,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.7),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            movie.rating.toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge,
-                                          ),
-                                          const SizedBox(width: 4),
-                                          Icon(
-                                            Icons.star,
-                                            color: ColorManager.secondary,
-                                            size: 18,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          options: CarouselOptions(
-                            height: 340,
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            viewportFraction: 0.6,
-                            onPageChanged: (index, reason) {
-                              final bloc = context.read<MoviesBloc>();
-                              final state = bloc.state;
-                              if (index >= state.availableNow.length - 2 &&
-                                  !state.isLoadingMore) {
-                                bloc.add(LoadMoreAvailableMovies());
-                              }
-                            },
-                          ),
+                        MoviesCarousel(
+                          movies: availableNow,
+                          isLoadingMore: state.isLoadingMore,
                         ),
-
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: Center(
                           child: Image.asset(
-                            "assets/images/watch_now.png",
-                            width: 220,
+                            ImageAssets.watchNowImage,
+                            width: 220.w,
                           ),
                         ),
                       ),
 
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.h),
 
                       GenereSection(
                         context: context,
                         title: "Action",
                         movies: state.moviesByGenre["action"] ?? [],
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8.h),
 
                       GenereSection(
                         context: context,
@@ -182,4 +117,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

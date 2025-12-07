@@ -18,3 +18,11 @@ class LoadAvailableMovies extends MoviesEvent {}
 // }
 class LoadMoreAvailableMovies extends MoviesEvent {}
 class ReloadGenres extends MoviesEvent {}
+class CarouselIndexChanged extends MoviesEvent {
+  final int index;
+  const CarouselIndexChanged(this.index);
+
+  @override
+  List<Object?> get props => [index];
+}
+

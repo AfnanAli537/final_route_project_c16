@@ -10,6 +10,9 @@ class ImageAssets {
   static const String avatar7 = '${base}avatar7.png';
   static const String avatar8 = '${base}avatar8.png';
   static const String avatar9 = '${base}avatar9.png';
+  static const String availableNowImage = '${base}available_now.png';
+static const String watchNowImage  ='${base}watch_now.png';
+
 
 }
 
