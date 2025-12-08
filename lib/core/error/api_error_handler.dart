@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:final_route_projcet_c16/core/constants/strings_keys.dart';
 
@@ -13,7 +12,7 @@ class ApiException implements Exception {
   String toString() => key; 
 }
 class ApiErrorHandler {
-   static String handleDioErrorKey(DioException error, {bool isRegister=false}) {
+   static String handleDioErrorKey(DioException error) {
     if (error.error is SocketException) {
       return StringKeys.noInternetConnection;
     }
@@ -53,7 +52,7 @@ class ApiErrorHandler {
     }
   }
 
-  static String handleStatusCodeKey(int? statusCode,  {bool isRegister=false}) {
+  static String handleStatusCodeKey(int? statusCode) {
     return _keyForStatus(statusCode);
   }
 
