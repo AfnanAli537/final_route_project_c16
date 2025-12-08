@@ -14,42 +14,53 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   MoviesBloc(this.getMovies) : super(const MoviesState()) {
     on<LoadAvailableMovies>(_loadAvailableMovies);
     on<LoadMoreAvailableMovies>(_loadMoreMovies);
-    // on<LoadMoviesByGenre>(_loadMoviesByGenre);
-    on<ReloadGenres>(_reloadGenresData);
+    on<LoadMoviesByGenre>(_loadMoviesByGenre);
+    // on<ReloadGenres>(_reloadGenresData);
+    on<CarouselIndexChanged>(_carouselIndexChanged);
+
+
   }
 
-Future<void> _reloadGenresData(
-  ReloadGenres event,
+void _carouselIndexChanged(
+  CarouselIndexChanged event,
   Emitter<MoviesState> emit,
-) async {
-  emit(state.copyWith(isLoading: true, error: null));
-
-  try {
-    final genres = ['action', 'animation'];
-    final Map<String, List<Movie>> newGenreData = {};
-    final Map<String, int> newPages = Map.from(state.genrePages);
-    for (var genre in genres) {
-      final nextPage = (state.genrePages[genre] ?? 0) + 1;
-
-      final movies = await getMovies(
-        genre: genre,
-        limit: 20,
-        page: nextPage,
-      );
-
-      newGenreData[genre] = movies; 
-      newPages[genre] = nextPage;   
-    }
-
-    emit(state.copyWith(
-      moviesByGenre: newGenreData,
-      genrePages: newPages,
-      isLoading: false,
-    ));
-  } catch (e) {
-    emit(state.copyWith(isLoading: false, error: e.toString()));
-  }
+) {
+  emit(state.copyWith(currentCarouselIndex: event.index));
 }
+
+
+// Future<void> _reloadGenresData(
+//   ReloadGenres event,
+//   Emitter<MoviesState> emit,
+// ) async {
+//   emit(state.copyWith(isLoading: true, error: null));
+
+//   try {
+//     final genres = ['action', 'animation'];
+//     final Map<String, List<Movie>> newGenreData = {};
+//     final Map<String, int> newPages = Map.from(state.genrePages);
+//     for (var genre in genres) {
+//       final nextPage = (state.genrePages[genre] ?? 0) + 1;
+
+//       final movies = await getMovies(
+//         genre: genre,
+//         limit: 20,
+//         page: nextPage,
+//       );
+
+//       newGenreData[genre] = movies; 
+//       newPages[genre] = nextPage;   
+//     }
+
+//     emit(state.copyWith(
+//       moviesByGenre: newGenreData,
+//       genrePages: newPages,
+//       isLoading: false,
+//     ));
+//   } catch (e) {
+//     emit(state.copyWith(isLoading: false, error: e.toString()));
+//   }
+// }
 
   Future<void> _loadAvailableMovies(
     LoadAvailableMovies event,
@@ -95,22 +106,22 @@ Future<void> _reloadGenresData(
     }
   }
 
-  // Future<void> _loadMoviesByGenre(
-  //   LoadMoviesByGenre event,
-  //   Emitter<MoviesState> emit,
-  // ) async {
-  //   emit(state.copyWith(isLoading: true, error: null));
+  Future<void> _loadMoviesByGenre(
+    LoadMoviesByGenre event,
+    Emitter<MoviesState> emit,
+  ) async {
+    emit(state.copyWith(isLoading: true, error: null));
 
-  //   try {
-  //     final movies = await getMovies(genre: event.genre, limit: 20,page: 1);
+    try {
+      final movies = await getMovies(genre: event.genre, limit: 20,page: 1);
 
-  //     final updatedMap = Map<String, List<Movie>>.from(state.moviesByGenre)
-  //       ..[event.genre] = movies;
+      final updatedMap = Map<String, List<Movie>>.from(state.moviesByGenre)
+        ..[event.genre] = movies;
 
-  //     emit(state.copyWith(moviesByGenre: updatedMap, isLoading: false));
-  //   } catch (e) {
-  //     emit(state.copyWith(isLoading: false, error: e.toString()));
-  //   }
-  // }
+      emit(state.copyWith(moviesByGenre: updatedMap, isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(isLoading: false, error: e.toString()));
+    }
+  }
 
 }
