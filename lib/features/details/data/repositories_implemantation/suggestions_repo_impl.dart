@@ -16,6 +16,7 @@ class SuggestionsRepositoryImpl implements SuggestionsRepository {
               title: e.title,
               rating: e.rating,
               poster: e.poster,
+              summary: e.summary,
             ))
         .toList();
   }

@@ -10,7 +10,6 @@ class MovieDetailsEntity {
   final int runtime;
   final int likeCount;
   final List<String> screenshots;
-  final List<MovieSummary> similar;
   final List<Cast> cast;
   final List<String> genres;
   final String ytTrailerCode;
@@ -26,7 +25,6 @@ class MovieDetailsEntity {
     required this.runtime,
     required this.likeCount,
     required this.screenshots,
-    required this.similar,
     required this.cast,
     required this.url,
     required this.genres,
@@ -34,19 +32,6 @@ class MovieDetailsEntity {
   });
 }
 
-class MovieSummary {
-  final int id;
-  final String title;
-  final String poster;
-  final double rating;
-
-  MovieSummary({
-    required this.id,
-    required this.title,
-    required this.poster,
-    required this.rating,
-  });
-}
 
 class Cast {
   final String name;

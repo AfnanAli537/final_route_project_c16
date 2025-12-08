@@ -1,4 +1,6 @@
 // ignore_for_file: deprecated_member_use
+import 'dart:math';
+
 import 'package:final_route_projcet_c16/core/constants/assets_manager.dart';
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view_model/bloc/home_bloc.dart';
@@ -13,9 +15,27 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+final List<String> allGenres = [
+  "action",
+  "animation",
+  "comedy",
+  "drama",
+  "horror",
+  "thriller",
+  "sci-fi",
+  "romance",
+];
+
+final random = Random();
+final firstGenre = allGenres[random.nextInt(allGenres.length)];
+String secondGenre;
+do {
+  secondGenre = allGenres[random.nextInt(allGenres.length)];
+} while (secondGenre == firstGenre); 
+
     context.read<MoviesBloc>().add(LoadAvailableMovies());
-    // context.read<MoviesBloc>().add(LoadMoviesByGenre("action"));
-    // context.read<MoviesBloc>().add(LoadMoviesByGenre("animation"));
+    context.read<MoviesBloc>().add(LoadMoviesByGenre(firstGenre));
+    context.read<MoviesBloc>().add(LoadMoviesByGenre(secondGenre));
     return Scaffold(
       body: BlocConsumer<MoviesBloc, MoviesState>(
         listener: (context, state) {
@@ -96,15 +116,15 @@ class HomeScreen extends StatelessWidget {
 
                       GenereSection(
                         context: context,
-                        title: "Action",
-                        movies: state.moviesByGenre["action"] ?? [],
+                        title: firstGenre.capitalize(),
+                        movies: state.moviesByGenre[firstGenre] ?? [],
                       ),
                       SizedBox(height: 8.h),
 
                       GenereSection(
                         context: context,
-                        title: "Animation",
-                        movies: state.moviesByGenre["animation"] ?? [],
+                        title: secondGenre.capitalize(),
+                        movies: state.moviesByGenre[secondGenre] ?? [],
                       ),
                     ],
                   ),
@@ -116,4 +136,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+extension StringCasingExtension on String {
+  String capitalize() => "${this[0].toUpperCase()}${substring(1)}";
 }

@@ -1,5 +1,7 @@
+import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/features/details/domain/entities/movie_details_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CastSection extends StatelessWidget {
   final List<Cast> cast;
@@ -9,7 +11,7 @@ class CastSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -21,35 +23,34 @@ class CastSection extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 10),
-          // Converting to vertical ListView
+          SizedBox(height: 10.h),
           SizedBox(
-            height: 300, // adjust height as needed
+            height: 300.h,
             child: ListView.builder(
               itemCount: cast.length,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 final actor = cast[index];
-             
+
                 return Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.all(12),
+                  margin: EdgeInsets.only(bottom: 12.h),
+                  padding: EdgeInsets.all(12.h),
                   decoration: BoxDecoration(
-                    color: const Color(0xff1D1D1D),
-                    borderRadius: BorderRadius.circular(12),
+                    color: ColorManager.border,
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(10.r),
                         child: Image.network(
                           actor.profileImage,
-                          width: 55,
-                          height: 55,
+                          width: 70.h,
+                          height: 70.h,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Text(
                         "Name: ${actor.name}\nCharacter: ${actor.character}",
                         style: const TextStyle(color: Colors.white),

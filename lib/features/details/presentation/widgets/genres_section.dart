@@ -1,4 +1,6 @@
+import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GenresSection extends StatelessWidget {
   final List<String> genres;
@@ -8,7 +10,7 @@ class GenresSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -16,17 +18,17 @@ class GenresSection extends StatelessWidget {
             "Genres",
             style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
+           SizedBox(height: 10.h),
 
           Wrap(
             spacing: 10,
             runSpacing: 10,
             children: genres.map((g) {
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                padding:  EdgeInsets.symmetric(horizontal: 18.w, vertical: 10.h),
                 decoration: BoxDecoration(
-                  color: const Color(0xff1D1D1D),
-                  borderRadius: BorderRadius.circular(30),
+                  color:ColorManager.border,
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Text(
                   g,
