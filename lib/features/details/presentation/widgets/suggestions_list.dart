@@ -18,6 +18,7 @@ class SuggestionsSliverGrid extends StatelessWidget {
             return MovieCard(
               ratingText: suggestions[index].rating.toString(),
               imageNetwork: suggestions[index].poster ?? '',
+              movie: suggestions[index].id,
             );
           },
           childCount: suggestions.length,
