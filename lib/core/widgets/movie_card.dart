@@ -12,14 +12,14 @@ class MovieCard extends StatelessWidget {
     required this.imageNetwork,
      this.movie,
   });
-  final Movie? movie;
+  final int? movie;
   final String ratingText;
   final String imageNetwork;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=>Navigator.pushNamed(context,AppRoutes.details,arguments: movie?.id.toInt()??0),
+      onTap: ()=>Navigator.pushNamed(context,AppRoutes.details,arguments: movie?.toInt()??0),
       child: Stack(
         alignment: Alignment.topLeft,
         children: [
