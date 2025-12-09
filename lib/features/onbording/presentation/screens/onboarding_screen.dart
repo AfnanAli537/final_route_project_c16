@@ -1,3 +1,4 @@
+import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
 import 'package:final_route_projcet_c16/features/onbording/domain/use_cases/get_onboarding_data_usecase.dart';
 import 'package:flutter/material.dart';
@@ -47,11 +48,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         },
         builder: (context, state) {
           if (state.isLoading) {
-            return const Scaffold(
-              backgroundColor: Color(0xFF0A0A0A),
+            return Scaffold(
+              backgroundColor: ColorManager.background,
               body: Center(
                 child: CircularProgressIndicator(
-                  color: Color(0xFFF6BD00),
+                  color: ColorManager.primary,
                 ),
               ),
             );
@@ -59,20 +60,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
           if (state.error != null) {
             return Scaffold(
-              backgroundColor: const Color(0xFF0A0A0A),
+              backgroundColor: ColorManager.background,
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.error_outline,
-                      color: Colors.red,
+                      color: ColorManager.error,
                       size: 60,
                     ),
                     const SizedBox(height: 16),
                     Text(
                       'Error: ${state.error}',
-                      style: const TextStyle(color: Colors.white),
+                      style: TextStyle(color: ColorManager.textPrimary),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
@@ -81,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         context.read<OnboardingBloc>().add(LoadOnboardingData());
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF6BD00),
+                        backgroundColor: ColorManager.primary,
                       ),
                       child: const Text('Retry'),
                     ),
@@ -92,7 +93,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           }
 
           return Scaffold(
-            backgroundColor: const Color(0xFF0A0A0A),
+            backgroundColor: ColorManager.background,
             body: Stack(
               children: [
                 PageView.builder(
@@ -120,15 +121,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: TextButton(
                       onPressed: () async {
                         await SessionService.markOnboardingCompleted();
-                        print('Onboarding marked as completed'); 
                         if (context.mounted) {
                           Navigator.pushReplacementNamed(context, AppRoutes.login);
                         }
                       },
-                      child: const Text(
+                      child: Text(
                         'Skip',
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: ColorManager.textSecondary,
                           fontSize: 16,
                         ),
                       ),
@@ -171,7 +171,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Text(
                     item.text,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: ColorManager.textPrimary,
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
@@ -181,7 +181,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Text(
                     item.subText,
                     style: const TextStyle(
-                      color: Colors.white70,
+                      color: ColorManager.textSecondary,
                       fontSize: 16,
                     ),
                     textAlign: TextAlign.center,
@@ -198,7 +198,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                          backgroundColor: const Color(0xFFF6BD00),
+                          backgroundColor: ColorManager.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
@@ -256,7 +256,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Text(
                     item.text,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: ColorManager.textPrimary,
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
@@ -266,7 +266,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Text(
                     item.subText,
                     style: const TextStyle(
-                      color: Colors.white70,
+                      color: ColorManager.textSecondary,
                       fontSize: 16,
                     ),
                     textAlign: TextAlign.center,
@@ -283,13 +283,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             context.read<OnboardingBloc>().add(NextPage());
                           } else {
                             await SessionService.markOnboardingCompleted();
-                            print('Onboarding completed (last screen)'); 
                             Navigator.pushReplacementNamed(context, AppRoutes.login);
                           }
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                          backgroundColor: const Color(0xFFF6BD00),
+                          backgroundColor: ColorManager.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),

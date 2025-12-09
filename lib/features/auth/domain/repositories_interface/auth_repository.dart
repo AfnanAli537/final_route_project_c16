@@ -1,4 +1,4 @@
-import 'package:final_route_projcet_c16/features/auth/domain/use_cases/register_usecase.dart';
+import 'package:final_route_projcet_c16/features/auth/register/domain/use_cases/register_usecase.dart';
 
 abstract class AuthRepository {
   Future<String> login({

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../../../core/network/endpoints.dart';
 import '../../../../core/services/session_service.dart';
-import 'package:final_route_projcet_c16/features/auth/domain/use_cases/register_usecase.dart';
+import 'package:final_route_projcet_c16/features/auth/register/domain/use_cases/register_usecase.dart';
 import '../models/login_response_model.dart';
 
 abstract class AuthRemoteDataSource {
@@ -55,7 +55,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Map<String, dynamic>> register(RegisterParams params) async {
     try {
       final requestData = params.toJson();
-      print('Registration data being sent: $requestData'); 
 
       final response = await dio.post(
         'auth/register',
@@ -63,7 +62,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       if (response.data is Map<String, dynamic>) {
-        print('Registration response: ${response.data}'); 
         return response.data;
       } else {
         throw Exception('Invalid response format');

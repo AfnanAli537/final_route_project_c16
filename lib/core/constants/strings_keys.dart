@@ -2,25 +2,25 @@ class StringKeys {
   // Application Constants
   static const String languageKey = 'language_code';
   static const String tokenKey = 'token';
-  static const String expireData = 'Expire Data';
+  static const String expireData = 'ExpireData';
 
   /// Network error
-  static const String connectionTimedOut = 'connection TimedOut';
-  static const String requestCancelled = 'request Cancelled';
-  static const String noInternetConnection = 'no Internet Connection';
+  static const String connectionTimedOut = 'connectionTimedOut';
+  static const String requestCancelled = 'requestCancelled';
+  static const String noInternetConnection = 'noInternetConnection';
 
   /// General error
-  static const String unexpectedError = 'unexpected Error';
-  static const String somethingWentWrong = 'some thing Went Wrong';
-  static const String serverError = 'server Error';
-  static const String serviceUnavailable = 'service Unavailable';
+  static const String unexpectedError = 'unexpectedError';
+  static const String somethingWentWrong = 'somethingWentWrong';
+  static const String serverError = 'serverError';
+  static const String serviceUnavailable = 'serviceUnavailable';
 
   /// HTTP status code error
-  static const String invalidEmailOrPassword = 'invalid Email Or Password';
-  static const String badRequest = 'bad Request';
+  static const String invalidEmailOrPassword = 'invalidEmailOrPassword';
+  static const String badRequest = 'badRequest';
   static const String unauthorized = 'unauthorized';
   static const String forbidden = 'forbidden';
-  static const String resourceNotFound = 'resource Not Found';
+  static const String resourceNotFound = 'resourceNotFound';
   static const String conflict = 'conflict';
 
 

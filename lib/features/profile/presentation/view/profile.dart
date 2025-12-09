@@ -25,7 +25,6 @@ class _ProfileState extends State<Profile> {
           Expanded(
             flex: 14,
             child: Container(
-              //height: 356.h,
               padding: REdgeInsets.only( left: 12, right: 12),
               decoration: BoxDecoration(color: ColorManager.border),
               child: SafeArea(
