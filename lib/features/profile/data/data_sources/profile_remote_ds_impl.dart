@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:final_route_projcet_c16/core/error/api_error_handler.dart';
 import 'package:final_route_projcet_c16/core/network/endpoints.dart';
 import 'package:final_route_projcet_c16/features/profile/data/data_sources/profile_remote_ds.dart';
 import 'package:final_route_projcet_c16/features/profile/data/models/profile_model.dart';
@@ -20,14 +19,14 @@ class ProfileRemoteDsImpl implements ProfileRemoteDs {
 
       final response = await dio.get(
         '${Endpoints.authBaseUrl}${Endpoints.profile}',
-        options: Options(
-          headers: {'Authorization': 'Bearer $token'},
-        ),
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
 
       return ProfileModel.fromJson(response.data);
     } on DioException catch (e) {
-      final message = e.response?.data is Map ? e.response?.data["message"] ?? "Failed to get profile" : "Failed to get profile";
+      final message = e.response?.data is Map
+          ? e.response?.data["message"] ?? "Failed to get profile"
+          : "Failed to get profile";
       throw Exception(message);
     } catch (e) {
       throw Exception("Unexpected error, please try again");
@@ -46,15 +45,18 @@ class ProfileRemoteDsImpl implements ProfileRemoteDs {
 
       return response.data['message'];
     } on DioException catch (e) {
-      final message = e.response?.data is Map ? e.response?.data["message"] ?? "Failed to get profile" : "Failed to get profile";
+      final message = e.response?.data is Map
+          ? e.response?.data["message"] ?? "Failed to get profile"
+          : "Failed to get profile";
       throw Exception(message);
     } catch (e) {
       throw Exception("Unexpected error, please try again");
     }
   }
+
   @override
   Future<String> deleteProfile() async {
-    try{
+    try {
       final token = await SessionService.getAuthToken() ?? '';
       final response = await dio.delete(
         '${Endpoints.authBaseUrl}${Endpoints.profile}',
@@ -66,7 +68,5 @@ class ProfileRemoteDsImpl implements ProfileRemoteDs {
       final msg = e.response?.data?["message"] ?? "Reset Password failed";
       throw Exception(msg);
     }
-
   }
 }
-

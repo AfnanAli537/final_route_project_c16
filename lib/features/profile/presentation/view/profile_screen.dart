@@ -60,7 +60,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               CircleAvatar(
                                 radius: 55.r,
                                 backgroundImage: profile?.avaterId != null
-                                    ? AssetImage('assets/images/avatar${profile!.avaterId}.png')
+                                    ? AssetImage(
+                                        'assets/images/avatar${profile!.avaterId}.png',
+                                      )
                                     : null,
                                 child: profile?.avaterId == null
                                     ? CircularProgressIndicator()
@@ -70,13 +72,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               isLoading
                                   ? SizedBox.shrink()
                                   : Text(
-                                profile?.name ?? "",
-                                style: GoogleFonts.roboto(
-                                  color: ColorManager.textPrimary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16.sp,
-                                ),
-                              ),
+                                      profile?.name ?? "",
+                                      style: GoogleFonts.roboto(
+                                        color: ColorManager.textPrimary,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.sp,
+                                      ),
+                                    ),
                             ],
                           ),
                           Column(
@@ -116,34 +118,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onPressed: isLoading
                                   ? null
                                   : () async {
-                                final updatedProfile = await Navigator.push<Profile>(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => MultiBlocProvider(
-                                      providers: [
-                                        BlocProvider(
-                                          create: (context) => sl<UpdateProfileBloc>(),
-                                        ),
-                                        BlocProvider(
-                                          create: (context) =>
-                                          sl<ProfileBloc>()..add(LoadProfile()),
-                                        ),
-                                      ],
-                                      child: UpdateProfileScreen(
-                                        avatarId: profile!.avaterId,
-                                        name: profile!.name,
-                                        phone: profile!.phone,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                                if (updatedProfile != null) {
-                                  setState(() {
-                                    profile = updatedProfile;
-                                  });
-                                  context.read<ProfileBloc>().add(LoadProfile());
-                                }
-                              },
+                                      final updatedProfile =
+                                          await Navigator.push<Profile>(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) => MultiBlocProvider(
+                                                providers: [
+                                                  BlocProvider(
+                                                    create: (context) =>
+                                                        sl<UpdateProfileBloc>(),
+                                                  ),
+                                                  BlocProvider(
+                                                    create: (context) =>
+                                                        sl<ProfileBloc>()
+                                                          ..add(LoadProfile()),
+                                                  ),
+                                                ],
+                                                child: UpdateProfileScreen(
+                                                  avatarId: profile!.avaterId,
+                                                  name: profile!.name,
+                                                  phone: profile!.phone,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                      if (updatedProfile != null) {
+                                        setState(() {
+                                          profile = updatedProfile;
+                                        });
+                                        context.read<ProfileBloc>().add(
+                                          LoadProfile(),
+                                        );
+                                      }
+                                    },
                               child: Text("Edit Profile"),
                             ),
                           ),
@@ -178,8 +185,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: CustomWatchHistoryList(
                               onTap: () => setState(() => currentIndex = 0),
                               icon: Icons.list,
-                              colorSelected:
-                              currentIndex == 0 ? ColorManager.primary : Colors.transparent,
+                              colorSelected: currentIndex == 0
+                                  ? ColorManager.primary
+                                  : Colors.transparent,
                               text: "Watch List",
                             ),
                           ),
@@ -187,8 +195,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: CustomWatchHistoryList(
                               onTap: () => setState(() => currentIndex = 1),
                               icon: Icons.folder,
-                              colorSelected:
-                              currentIndex == 1 ? ColorManager.primary : Colors.transparent,
+                              colorSelected: currentIndex == 1
+                                  ? ColorManager.primary
+                                  : Colors.transparent,
                               text: "History",
                             ),
                           ),
@@ -199,11 +208,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               );
             },
-
           ),
-          Expanded(
-            child: currentIndex == 0 ? WatchList() : HistoryList(),
-          ),
+          Expanded(child: currentIndex == 0 ? WatchList() : HistoryList()),
         ],
       ),
     );

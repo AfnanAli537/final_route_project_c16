@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 part 'profile_event.dart';
+
 part 'profile_state.dart';
 
 @injectable

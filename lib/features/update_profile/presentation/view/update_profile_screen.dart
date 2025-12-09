@@ -1,6 +1,7 @@
 import 'package:final_route_projcet_c16/core/constants/assets_manager.dart';
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
+import 'package:final_route_projcet_c16/core/utils/validators/regex.dart';
 import 'package:final_route_projcet_c16/features/profile/domain/entities/profile.dart';
 import 'package:final_route_projcet_c16/features/profile/presentation/view_model/bloc/profile_bloc.dart';
 import 'package:final_route_projcet_c16/features/profile/presentation/widgets/custom_elevated_button_red.dart';
@@ -47,17 +48,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     ImageAssets.avatar7,
     ImageAssets.avatar8,
     ImageAssets.avatar9,
-  ];
-  final seeds = [
-    "avatar6",
-    "boy10",
-    "boy3_smile",
-    "girl1",
-    "avatar9",
-    "avatar8",
-    "funny1",
-    "funny2",
-    "funny8",
   ];
   int selected = 0;
   bool showReset = false;
@@ -170,35 +160,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       hintText: "Enter your name",
                       prefixIcon: Icon(Icons.person),
                       controller: nameController,
-                      validator: (val) {
-                        RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9,.-]+$');
-                        if (val == null) {
-                          return 'this field is required';
-                        } else if (val.isEmpty) {
-                          return 'this field is required';
-                        } else if (!usernameRegex.hasMatch(val)) {
-                          return 'enter valid username';
-                        } else {
-                          return null;
-                        }
-                      },
+                      validator: Regex.validateUsername,
                     ),
                     SizedBox(height: 20.h),
                     CustomTextField(
                       hintText: "Enter your phone",
                       prefixIcon: Icon(Icons.phone),
                       controller: phoneController,
-                      validator: (val) {
-                        if (val == null) {
-                          return 'this field is required';
-                        } else if (int.tryParse(val.trim()) == null) {
-                          return 'enter numbers only';
-                        } else if (val.trim().length != 11) {
-                          return 'enter value must equal 11 digit';
-                        } else {
-                          return null;
-                        }
-                      },
+                      validator: Regex.validatePhoneNumber,
                     ),
                     SizedBox(height: 30.h),
                     Align(
@@ -218,18 +187,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         hintText: "Enter your old password",
                         prefixIcon: Icon(Icons.lock),
                         controller: oldPasswordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Enter Old Password";
-                          }
-                          final password = RegExp(
-                            r'^(?=.[A-Z])(?=.[a-z])(?=.*[0-9]).{8,}$',
-                          );
-                          if (password.hasMatch(value)) {
-                            print("Strong Password");
-                          }
-                          return null;
-                        },
+                        validator: Regex.validatePassword,
                         suffixIcon: IconButton(
                           icon: Icon(
                             showOldPassword
@@ -249,18 +207,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         hintText: "Enter your new password",
                         prefixIcon: Icon(Icons.lock),
                         controller: newPasswordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Enter New Password";
-                          }
-                          final password = RegExp(
-                            r'^(?=.[A-Z])(?=.[a-z])(?=.*[0-9]).{8,}$',
-                          );
-                          if (password.hasMatch(value)) {
-                            print("Strong Password");
-                          }
-                          return null;
-                        },
+                        validator: Regex.validatePassword,
                         suffixIcon: IconButton(
                           icon: Icon(
                             showNewPassword
@@ -400,7 +347,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         child: SizedBox(
           height: 360.h,
           child: GridView.builder(
-            itemCount: seeds.length,
+            itemCount: avatars.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               crossAxisSpacing: 15,

@@ -12,6 +12,7 @@ class UpdateProfileSuccess extends UpdateProfileState {
 
 class UpdateProfileDeleted extends UpdateProfileState {
   final String message;
+
   UpdateProfileDeleted(this.message);
 }
 
@@ -25,11 +26,12 @@ class ResetPasswordLoading extends UpdateProfileState {}
 
 class ResetPasswordSuccess extends UpdateProfileState {
   final String message;
+
   ResetPasswordSuccess(this.message);
 }
 
 class ResetPasswordError extends UpdateProfileState {
   final String message;
+
   ResetPasswordError(this.message);
 }
-

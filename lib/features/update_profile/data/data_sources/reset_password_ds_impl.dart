@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../core/network/endpoints.dart';
 import '../../../../core/services/session_service.dart';
 import 'reset_password_ds.dart';
@@ -19,13 +20,8 @@ class ResetPasswordDsImpl implements ResetPasswordDs {
     try {
       final response = await dio.patch(
         "${Endpoints.authBaseUrl}${Endpoints.resetPassword}",
-        data: {
-          "oldPassword": oldPassword,
-          "newPassword": newPassword,
-        },
-        options: Options(
-          headers: {"Authorization": "Bearer $token"},
-        ),
+        data: {"oldPassword": oldPassword, "newPassword": newPassword},
+        options: Options(headers: {"Authorization": "Bearer $token"}),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {

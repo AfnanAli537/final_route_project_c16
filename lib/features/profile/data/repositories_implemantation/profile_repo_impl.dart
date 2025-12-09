@@ -18,20 +18,24 @@ class ProfileRepositoryImpl implements ProfileRepo {
       email: model.email,
       name: model.name,
       phone: model.phone,
-      avaterId: model.avaterId ,
+      avaterId: model.avaterId,
     );
   }
+
   @override
   Future<String> updateProfile(Profile profile) async {
     final model = profile;
-    return await remoteDs.updateProfile(ProfileModel(
-      id: model.id,
-      email: model.email,
-      name: model.name,
-      phone: model.phone,
-      avaterId: model.avaterId ,
-    ));
+    return await remoteDs.updateProfile(
+      ProfileModel(
+        id: model.id,
+        email: model.email,
+        name: model.name,
+        phone: model.phone,
+        avaterId: model.avaterId,
+      ),
+    );
   }
+
   @override
   Future<String> deleteProfile() async {
     return await remoteDs.deleteProfile();

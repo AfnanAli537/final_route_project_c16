@@ -1,11 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:final_route_projcet_c16/features/profile/domain/entities/profile.dart';
 import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/delete_profile_use_case.dart';
 import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/reset_password_use_case.dart';
 import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_event.dart';
 import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_state.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../domain/use_cases/update_profile_use_case.dart';
 
@@ -16,11 +14,10 @@ class UpdateProfileBloc extends Bloc<UpdateProfileEvent, UpdateProfileState> {
   final ResetPasswordUseCase resetPasswordUseCase;
 
   UpdateProfileBloc(
-      this.updateProfileUseCase,
-      this.deleteProfileUseCase,
-      this.resetPasswordUseCase,
-      ) : super(UpdateProfileInitial()) {
-
+    this.updateProfileUseCase,
+    this.deleteProfileUseCase,
+    this.resetPasswordUseCase,
+  ) : super(UpdateProfileInitial()) {
     on<SubmitUpdateProfile>((event, emit) async {
       emit(UpdateProfileLoading());
       try {
@@ -44,13 +41,14 @@ class UpdateProfileBloc extends Bloc<UpdateProfileEvent, UpdateProfileState> {
     on<SubmitResetPassword>((event, emit) async {
       emit(UpdateProfileLoading());
       try {
-        final message = await resetPasswordUseCase(event.oldPassword, event.newPassword);
+        final message = await resetPasswordUseCase(
+          event.oldPassword,
+          event.newPassword,
+        );
         emit(ResetPasswordSuccess(message));
       } catch (e) {
         emit(ResetPasswordError(e.toString().replaceAll("Exception: ", "")));
       }
     });
-
-
   }
 }

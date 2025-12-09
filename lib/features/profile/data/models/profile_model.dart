@@ -20,7 +20,7 @@ class ProfileModel {
       email: data['email'] ?? '',
       name: data['name'] ?? '',
       phone: data['phone'] ?? '',
-      avaterId: data['avaterId'] ?? 0 ,
+      avaterId: data['avaterId'] ?? 0,
     );
   }
 
@@ -30,9 +30,8 @@ class ProfileModel {
       "email": email,
       "name": name,
       "phone": phone,
-      "avaterId" : avaterId,
+      "avaterId": avaterId,
     };
     return map;
   }
-
 }

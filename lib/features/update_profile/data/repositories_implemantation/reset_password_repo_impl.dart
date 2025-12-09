@@ -10,9 +10,6 @@ class ResetPasswordRepoImpl implements ResetPasswordRepo {
 
   @override
   Future<String> resetPassword(String oldPassword, String newPassword) {
-    return ds.resetPassword(
-      oldPassword: oldPassword,
-      newPassword: newPassword,
-    );
+    return ds.resetPassword(oldPassword: oldPassword, newPassword: newPassword);
   }
 }
