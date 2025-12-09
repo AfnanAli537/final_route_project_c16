@@ -36,6 +36,8 @@ class MoviesRemoteDataSource implements MoviesDataSource {
     );
     print(response.data["data"]["movies"]);
     final list = response.data["data"]["movies"] as List?;
+     print("DETAILS FULL URL = ${Endpoints.listMovies}");
+
     if (list == null) return [];
     return list.map((e) => MovieModel.fromJson(e)).toList();
     

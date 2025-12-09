@@ -23,6 +23,13 @@ class GenereSection extends StatefulWidget {
 class _GenereSectionState extends State<GenereSection> {
   @override
   Widget build(BuildContext context) {
+     if (widget.movies!.isEmpty) {
+      return Center(
+        child: CircularProgressIndicator(
+          color: ColorManager.secondary,
+        ),
+      );
+    }
     return Column(
       children: [
         Padding(
@@ -78,6 +85,7 @@ class _GenereSectionState extends State<GenereSection> {
             itemBuilder: (context, index) {
               final movie = widget.movies![index];
               return MovieCard(
+                movie: movie.id,
                 ratingText: movie.rating.toString(),
                 imageNetwork: movie.image ?? "",
               );

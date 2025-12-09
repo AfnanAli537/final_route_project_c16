@@ -9,12 +9,20 @@ sealed class MoviesEvent extends Equatable {
 
 class LoadAvailableMovies extends MoviesEvent {}
 
-// class LoadMoviesByGenre extends MoviesEvent {
-//   final String genre;
-//   const LoadMoviesByGenre(this.genre);
+class LoadMoviesByGenre extends MoviesEvent {
+  final String genre;
+  const LoadMoviesByGenre(this.genre);
 
-//   @override
-//   List<Object?> get props => [genre];
-// }
+  @override
+  List<Object?> get props => [genre];
+}
 class LoadMoreAvailableMovies extends MoviesEvent {}
 class ReloadGenres extends MoviesEvent {}
+class CarouselIndexChanged extends MoviesEvent {
+  final int index;
+  const CarouselIndexChanged(this.index);
+
+  @override
+  List<Object?> get props => [index];
+}
+
