@@ -12,4 +12,6 @@ class Movie {
     required this.rating,
     required this.genres,
   });
+
+  static fromJson(e) {}
 }

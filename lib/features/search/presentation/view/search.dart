@@ -4,7 +4,7 @@ import 'package:final_route_projcet_c16/features/search/presentation/view_model/
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_event.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_state.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/widgets/custom_text_field.dart';
-import 'package:final_route_projcet_c16/features/search/presentation/widgets/movie_card.dart';
+import 'package:final_route_projcet_c16/core/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,6 +73,7 @@ class _SearchState extends State<Search> {
                   }
                 },
               ),
+              SizedBox(height: 10.h,),
               Expanded(
                 child: BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
