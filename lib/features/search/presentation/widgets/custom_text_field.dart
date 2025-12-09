@@ -10,6 +10,8 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     required this.controller,
     this.suffixIcon,
+    this.obscureText = false,
+    this.validator,
   });
 
   final String hintText;
@@ -17,6 +19,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final void Function(String?)? onChanged;
   final TextEditingController controller;
+  final bool obscureText;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,9 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
         color: ColorManager.border,
       ),
-      child: TextField(
+      child: TextFormField(
+        validator: validator,
+        obscureText: obscureText,
         controller: controller,
         style: Theme.of(context).textTheme.bodyLarge,
         onChanged: onChanged,

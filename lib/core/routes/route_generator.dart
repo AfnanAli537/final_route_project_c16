@@ -1,18 +1,21 @@
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
-import 'package:final_route_projcet_c16/features/onbording/presentation/screens/onboarding_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:final_route_projcet_c16/features/splash/presentation/screens/splash_screen.dart';
 import 'package:final_route_projcet_c16/features/auth/presentation/screens/login_screen.dart';
 import 'package:final_route_projcet_c16/features/auth/presentation/screens/register_screen.dart';
-import 'package:final_route_projcet_c16/features/onbording/presentation/blocs/onboarding_bloc.dart';
-import 'package:final_route_projcet_c16/features/onbording/presentation/blocs/onboarding_event.dart';
-import 'package:final_route_projcet_c16/features/onbording/data/onboarding_repository_impl.dart';
-import 'package:final_route_projcet_c16/features/onbording/domain/use_cases/get_onboarding_data_usecase.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
 import 'package:final_route_projcet_c16/features/main/main_layout.dart';
-import 'package:final_route_projcet_c16/features/update_profile/presentation/view/update_profile.dart';
+import 'package:final_route_projcet_c16/features/onbording/data/onboarding_repository_impl.dart';
+import 'package:final_route_projcet_c16/features/onbording/domain/use_cases/get_onboarding_data_usecase.dart';
+import 'package:final_route_projcet_c16/features/onbording/presentation/blocs/onboarding_bloc.dart';
+import 'package:final_route_projcet_c16/features/onbording/presentation/blocs/onboarding_event.dart';
+import 'package:final_route_projcet_c16/features/onbording/presentation/screens/onboarding_screen.dart';
+import 'package:final_route_projcet_c16/features/profile/presentation/view_model/bloc/profile_bloc.dart';
+import 'package:final_route_projcet_c16/features/splash/presentation/screens/splash_screen.dart';
+import 'package:final_route_projcet_c16/features/update_profile/presentation/view/update_profile_screen.dart';
+import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../features/browser/presentation/view_model/bloc/browse_event.dart';
 import '../di/di.dart';
 
@@ -34,19 +37,14 @@ abstract class RoutesManager {
         {
           return CupertinoPageRoute(builder: (context) => MainLayout());
         }
-      case AppRoutes.updateProfile:
-        {
-          return CupertinoPageRoute(builder: (context) => UpdateProfile());
-        }
-
-    case AppRoutes.browse:
-  final genre = settings.arguments as String?; 
-  return CupertinoPageRoute(
-    builder: (_) => BlocProvider(
-      create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()),
-      child: Browse(selectedGenre: genre, showBackButton: true,), 
-    ),
-  );
+      case AppRoutes.browse:
+        final genre = settings.arguments as String?;
+        return CupertinoPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()),
+            child: Browse(selectedGenre: genre, showBackButton: true),
+          ),
+        );
 
       default:
         return _pageRoute(const SplashScreen());
