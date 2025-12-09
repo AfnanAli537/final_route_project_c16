@@ -18,7 +18,7 @@ class SessionService {
 
   static Future<void> setAuthToken(String token) async {
     if (_prefs == null) await init();
-    final result = await _prefs!.setString(_tokenKey, token);
+  await _prefs!.setString(_tokenKey, token);
   }
 
   static Future<void> clearAuthToken() async {
@@ -37,7 +37,7 @@ class SessionService {
 
   static Future<void> markOnboardingCompleted() async {
     if (_prefs == null) await init();
-    final result = await _prefs!.setBool(_onboardingKey, true);
+   await _prefs!.setBool(_onboardingKey, true);
   }
 
   static Future<void> resetOnboarding() async {
@@ -52,7 +52,7 @@ class SessionService {
 
     try {
       final apiClient = ApiClient(Dio());
-      final response = await apiClient.get(
+      await apiClient.get(
         Endpoints.profile,
         options: Options(
           headers: {

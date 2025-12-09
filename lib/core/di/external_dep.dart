@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:final_route_projcet_c16/core/network/endpoints.dart';
 import 'package:final_route_projcet_c16/core/network/network_config.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';

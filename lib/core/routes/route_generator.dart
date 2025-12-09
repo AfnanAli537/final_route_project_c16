@@ -1,4 +1,7 @@
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
+import 'package:final_route_projcet_c16/features/details/presentation/view/details_screen.dart';
+import 'package:final_route_projcet_c16/features/details/presentation/view_model/details_bloc/movie_details_bloc.dart';
+import 'package:final_route_projcet_c16/features/details/presentation/view_model/suggestions_bloc/movie_suggestions_bloc.dart';
 import 'package:final_route_projcet_c16/features/auth/login/presentation/screens/ForgetPasswordScreen.dart';
 import 'package:final_route_projcet_c16/features/onbording/presentation/screens/onboarding_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +15,6 @@ import 'package:final_route_projcet_c16/features/onbording/domain/use_cases/get_
 import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
 import 'package:final_route_projcet_c16/features/main/main_layout.dart';
-
 
 import '../../features/browser/presentation/view_model/bloc/browse_event.dart';
 import '../di/di.dart';
@@ -32,18 +34,39 @@ abstract class RoutesManager {
         {
           return CupertinoPageRoute(builder: (context) => MainLayout());
         }
-      case AppRoutes.forgetPassword:
-         return _pageRoute(ForgetPasswordScreen());
-  
+      case AppRoutes.details:
+        {
+          final movieId = settings.arguments as int;
 
-    case AppRoutes.browse:
-  final genre = settings.arguments as String?; 
-  return CupertinoPageRoute(
-    builder: (_) => BlocProvider(
-      create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()),
-      child: Browse(selectedGenre: genre, showBackButton: true,), 
-    ),
-  );
+          return CupertinoPageRoute(
+            builder: (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) =>
+                      sl<MovieDetailsBloc>()..add(FetchMovieDetails(movieId)),
+                ),
+                BlocProvider(
+                  create: (_) =>
+                      sl<MovieSuggestionsBloc>()
+                        ..add(FetchSuggestions(movieId)),
+                ),
+              ],
+              child: DetailsScreen(movieId: movieId),
+            ),
+          );
+        }
+
+      case AppRoutes.forgetPassword:
+        return _pageRoute(ForgetPasswordScreen());
+
+      case AppRoutes.browse:
+        final genre = settings.arguments as String?;
+        return CupertinoPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()),
+            child: Browse(selectedGenre: genre, showBackButton: true),
+          ),
+        );
 
       default:
         return _pageRoute(LoginScreen());

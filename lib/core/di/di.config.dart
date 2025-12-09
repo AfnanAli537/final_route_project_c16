@@ -24,6 +24,30 @@ import 'package:final_route_projcet_c16/features/browser/domain/use_cases/browse
     as _i147;
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart'
     as _i465;
+import 'package:final_route_projcet_c16/features/details/data/data_sources/movie_details_data_sources.dart'
+    as _i198;
+import 'package:final_route_projcet_c16/features/details/data/data_sources/movie_details_remote_data_source.dart'
+    as _i530;
+import 'package:final_route_projcet_c16/features/details/data/data_sources/movie_suggestion_data_sources.dart'
+    as _i241;
+import 'package:final_route_projcet_c16/features/details/data/data_sources/movie_suggestion_remote_data_sources.dart'
+    as _i515;
+import 'package:final_route_projcet_c16/features/details/data/repositories_implemantation/details_repo_impl.dart'
+    as _i507;
+import 'package:final_route_projcet_c16/features/details/data/repositories_implemantation/suggestions_repo_impl.dart'
+    as _i463;
+import 'package:final_route_projcet_c16/features/details/domain/repositories_interface/details_repo_interface.dart'
+    as _i818;
+import 'package:final_route_projcet_c16/features/details/domain/repositories_interface/suggestions_repo_interface.dart'
+    as _i211;
+import 'package:final_route_projcet_c16/features/details/domain/use_cases/movie_details_use_case.dart'
+    as _i689;
+import 'package:final_route_projcet_c16/features/details/domain/use_cases/movie_suggestions_use_case.dart'
+    as _i12;
+import 'package:final_route_projcet_c16/features/details/presentation/view_model/details_bloc/movie_details_bloc.dart'
+    as _i1028;
+import 'package:final_route_projcet_c16/features/details/presentation/view_model/suggestions_bloc/movie_suggestions_bloc.dart'
+    as _i709;
 import 'package:final_route_projcet_c16/features/main/home/data/data_sources/data_sources.dart'
     as _i1033;
 import 'package:final_route_projcet_c16/features/main/home/data/data_sources/movies_remote_data_source.dart'
@@ -46,8 +70,6 @@ import 'package:final_route_projcet_c16/features/profile/domain/repositories_int
     as _i791;
 import 'package:final_route_projcet_c16/features/profile/domain/use_cases/get_profile_use_case.dart'
     as _i392;
-import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/update_profile_use_case.dart'
-    as _i520;
 import 'package:final_route_projcet_c16/features/profile/presentation/view_model/bloc/profile_bloc.dart'
     as _i646;
 import 'package:final_route_projcet_c16/features/search/data/data_sources/search_remote_data_source.dart'
@@ -72,6 +94,8 @@ import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases
     as _i95;
 import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/reset_password_use_case.dart'
     as _i694;
+import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/update_profile_use_case.dart'
+    as _i89;
 import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_bloc.dart'
     as _i963;
 import 'package:get_it/get_it.dart' as _i174;
@@ -104,6 +128,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i798.SearchRemoteDataSource>(
       () => _i239.SearchRemoteDataSourceImpl(gh<_i759.ApiClient>()),
     );
+    gh.lazySingleton<_i241.SuggestionsDataSource>(
+      () => _i515.SuggestionsRemoteDataSourceImpl(gh<_i759.ApiClient>()),
+    );
     gh.lazySingleton<_i945.SearchRepo>(
       () => _i29.SearchRepoImpl(gh<_i798.SearchRemoteDataSource>()),
     );
@@ -116,16 +143,25 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i392.GetProfile>(
       () => _i392.GetProfile(gh<_i791.ProfileRepo>()),
     );
-    gh.factory<_i520.UpdateProfileUseCase>(
-      () => _i520.UpdateProfileUseCase(gh<_i791.ProfileRepo>()),
-    );
     gh.factory<_i95.DeleteProfile>(
       () => _i95.DeleteProfile(gh<_i791.ProfileRepo>()),
+    );
+    gh.factory<_i89.UpdateProfileUseCase>(
+      () => _i89.UpdateProfileUseCase(gh<_i791.ProfileRepo>()),
+    );
+    gh.lazySingleton<_i211.SuggestionsRepository>(
+      () => _i463.SuggestionsRepositoryImpl(gh<_i241.SuggestionsDataSource>()),
     );
     gh.lazySingleton<_i469.ResetPasswordDs>(
       () => resetPasswordModule.provideResetPasswordDs(
         gh<_i361.Dio>(instanceName: 'authorizedDio'),
       ),
+    );
+    gh.lazySingleton<_i198.DetailsDataSource>(
+      () => _i530.MovieRemoteDataSourceImpl(gh<_i759.ApiClient>()),
+    );
+    gh.factory<_i12.GetSuggestionsUseCase>(
+      () => _i12.GetSuggestionsUseCase(gh<_i211.SuggestionsRepository>()),
     );
     gh.factory<_i646.ProfileBloc>(
       () => _i646.ProfileBloc(gh<_i392.GetProfile>()),
@@ -142,11 +178,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i834.ResetPasswordRepo>(
       () => _i552.ResetPasswordRepoImpl(gh<_i469.ResetPasswordDs>()),
     );
+    gh.factory<_i709.MovieSuggestionsBloc>(
+      () => _i709.MovieSuggestionsBloc(gh<_i12.GetSuggestionsUseCase>()),
+    );
     gh.lazySingleton<_i746.MoviesRepository>(
       () => _i488.MoviesRepositoryImpl(gh<_i1033.MoviesDataSource>()),
     );
     gh.factory<_i465.BrowseBloc>(
       () => _i465.BrowseBloc(gh<_i147.BrowseMoviesUseCase>()),
+    );
+    gh.lazySingleton<_i818.MovieDetailsRepository>(
+      () => _i507.MovieDetailsRepositoryImpl(gh<_i198.DetailsDataSource>()),
     );
     gh.factory<_i659.SearchBloc>(
       () => _i659.SearchBloc(gh<_i322.SearchMoviesUseCase>()),
@@ -160,12 +202,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i232.MoviesBloc>(
       () => _i232.MoviesBloc(gh<_i645.GetMoviesUseCase>()),
     );
+    gh.factory<_i689.MovieDetailsUseCase>(
+      () => _i689.MovieDetailsUseCase(gh<_i818.MovieDetailsRepository>()),
+    );
     gh.factory<_i963.UpdateProfileBloc>(
       () => _i963.UpdateProfileBloc(
-        gh<_i520.UpdateProfileUseCase>(),
+        gh<_i89.UpdateProfileUseCase>(),
         gh<_i95.DeleteProfile>(),
         gh<_i694.ResetPasswordUseCase>(),
       ),
+    );
+    gh.factory<_i1028.MovieDetailsBloc>(
+      () => _i1028.MovieDetailsBloc(gh<_i689.MovieDetailsUseCase>()),
     );
     return this;
   }
