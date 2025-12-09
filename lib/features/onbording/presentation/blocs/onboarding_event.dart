@@ -12,7 +12,3 @@ class LoadOnboardingData extends OnboardingEvent {}
 class NextPage extends OnboardingEvent {}
 
 class PreviousPage extends OnboardingEvent {}
-
-class SkipOnboarding extends OnboardingEvent {}
-
-class CompleteOnboarding extends OnboardingEvent {}

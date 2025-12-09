@@ -111,7 +111,6 @@ class _SearchState extends State<Search> {
                         itemBuilder: (context, index) => MovieCard(
                           ratingText: state.movies[index].rating.toString(),
                           imageNetwork: state.movies[index].image,
-                          movie: state.movies[index].id,
                         ),
                       );
                     }
