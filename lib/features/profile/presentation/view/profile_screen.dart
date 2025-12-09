@@ -109,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 21.h),
+                      SizedBox(height: 14.h),
                       Row(
                         children: [
                           Expanded(
@@ -177,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
 
-                      SizedBox(height: 8.h),
+                      SizedBox(height: 5.h),
 
                       Row(
                         children: [
