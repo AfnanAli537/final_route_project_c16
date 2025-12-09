@@ -73,6 +73,7 @@ class _SearchState extends State<Search> {
                   }
                 },
               ),
+              SizedBox(height: 10.h,),
               Expanded(
                 child: BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {

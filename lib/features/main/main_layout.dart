@@ -1,19 +1,23 @@
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
-import 'package:final_route_projcet_c16/features/profile/presentation/view/profile.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view/home_screen.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view_model/bloc/home_bloc.dart';
+import 'package:final_route_projcet_c16/features/profile/presentation/view/profile_screen.dart';
+import 'package:final_route_projcet_c16/features/profile/presentation/view_model/bloc/profile_bloc.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
+import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../core/di/di.dart';
 import '../browser/presentation/view_model/bloc/browse_bloc.dart';
 import '../browser/presentation/view_model/bloc/browse_event.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
+
   @override
   State<MainLayout> createState() => MainLayoutState();
 }
@@ -27,9 +31,17 @@ class MainLayoutState extends State<MainLayout> {
       child: HomeScreen(),
     ),
     BlocProvider(create: (_) => sl<SearchBloc>(), child: Search()),
-    BlocProvider(create: (_) =>
-    sl<BrowseBloc>()..add(LoadMovieEvent()), child: Browse()),
-    Profile(),
+    BlocProvider(
+      create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()),
+      child: Browse(),
+    ),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<ProfileBloc>()..add(LoadProfile())),
+        BlocProvider(create: (_) => sl<UpdateProfileBloc>()),
+      ],
+      child: ProfileScreen(),
+    ),
     BlocProvider(
       create: (_) => sl<BrowseBloc>()..add(LoadMovieEvent()),
       child: Browse(),
