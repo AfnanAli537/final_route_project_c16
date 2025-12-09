@@ -143,6 +143,7 @@ class _BrowseState extends State<Browse> {
                           return MovieCard(
                             ratingText: movie.rating.toString(),
                             imageNetwork: movie.image,
+                            movie: movie.id,
                           );
                         },
                       ),
