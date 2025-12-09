@@ -1,4 +1,6 @@
-import '../repositories_interface/auth_repository.dart';
+import 'package:final_route_projcet_c16/features/auth/domain/repositories_interface/auth_repository.dart';
+
+
 
 class GetUserProfileUseCase {
   final AuthRepository repository;

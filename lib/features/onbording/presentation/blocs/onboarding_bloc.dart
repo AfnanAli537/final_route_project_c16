@@ -10,8 +10,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<LoadOnboardingData>(_onLoadOnboardingData);
     on<NextPage>(_onNextPage);
     on<PreviousPage>(_onPreviousPage);
-    on<SkipOnboarding>(_onSkipOnboarding);
-    on<CompleteOnboarding>(_onCompleteOnboarding);
   }
 
   Future<void> _onLoadOnboardingData(
@@ -42,13 +40,5 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     if (state.currentPage > 0) {
       emit(state.copyWith(currentPage: state.currentPage - 1));
     }
-  }
-
-  void _onSkipOnboarding(SkipOnboarding event, Emitter<OnboardingState> emit) {
-    emit(state.copyWith(currentPage: state.items.length - 1));
-  }
-
-  void _onCompleteOnboarding(CompleteOnboarding event, Emitter<OnboardingState> emit) {
-    emit(state.copyWith(currentPage: state.items.length - 1));
   }
 }

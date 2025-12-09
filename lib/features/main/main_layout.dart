@@ -23,7 +23,7 @@ class MainLayoutState extends State<MainLayout> {
 
   final List<Widget> _pages = [
     BlocProvider<MoviesBloc>(
-      create: (_) => sl<MoviesBloc>(),
+      create: (_) => sl<MoviesBloc>()..add(ReloadGenres()),
       child: HomeScreen(),
     ),
     BlocProvider(create: (_) => sl<SearchBloc>(), child: Search()),
@@ -59,9 +59,9 @@ class MainLayoutState extends State<MainLayout> {
                 _currentIndex = index;
               });
 
-  //              if (_currentIndex == 0) {
-  //   context.read<MoviesBloc>().add( ReloadGenres());
-  // }
+               if (_currentIndex == 0) {
+    context.read<MoviesBloc>().add( ReloadGenres());
+  }
             },
             items: const [
               BottomNavigationBarItem(
