@@ -2,9 +2,6 @@ import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../features/main/home/domain/entities/movie_entity.dart';
-
 class MovieCard extends StatelessWidget {
   const MovieCard({
     super.key,
