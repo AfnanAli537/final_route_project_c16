@@ -12,7 +12,8 @@ import 'package:final_route_projcet_c16/features/onbording/domain/use_cases/get_
 import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
 import 'package:final_route_projcet_c16/features/main/main_layout.dart';
-import 'package:final_route_projcet_c16/features/update_profile/presentation/view/update_profile.dart';
+
+
 import '../../features/browser/presentation/view_model/bloc/browse_event.dart';
 import '../di/di.dart';
 
@@ -30,10 +31,6 @@ abstract class RoutesManager {
       case AppRoutes.main:
         {
           return CupertinoPageRoute(builder: (context) => MainLayout());
-        }
-      case AppRoutes.updateProfile:
-        {
-          return CupertinoPageRoute(builder: (context) => UpdateProfile());
         }
       case AppRoutes.forgetPassword:
          return _pageRoute(ForgetPasswordScreen());

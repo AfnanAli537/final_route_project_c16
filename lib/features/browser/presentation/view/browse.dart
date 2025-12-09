@@ -78,7 +78,7 @@ class _BrowseState extends State<Browse> {
               return Column(
                 children: [
                   SizedBox(
-                    height: 60.h,
+                    height: 67.h,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
@@ -106,7 +106,7 @@ class _BrowseState extends State<Browse> {
                               borderRadius: BorderRadius.circular(14.r),
                               border: Border.all(
                                 color: ColorManager.primary,
-                                width: 1,
+                                width: 2,
                               ),
                             ),
                             child: Text(

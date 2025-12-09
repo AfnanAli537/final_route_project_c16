@@ -1,7 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:final_route_projcet_c16/core/network/endpoints.dart';
 import 'package:final_route_projcet_c16/core/network/network_config.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../features/update_profile/data/data_sources/reset_password_ds.dart' ;
+import '../../features/update_profile/data/data_sources/reset_password_ds_impl.dart';
 
 @module
 abstract class RegisterModule {
@@ -13,4 +17,22 @@ abstract class RegisterModule {
     ),);
   @preResolve
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
+}
+
+
+@module
+abstract class ResetPasswordModule {
+  @lazySingleton
+  @Named('authorizedDio')
+  Dio get authorizedDio => Dio(
+    BaseOptions(
+      baseUrl: 'https://route-movie-apis.vercel.app',
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+    ),
+  );
+
+  @lazySingleton
+  ResetPasswordDs provideResetPasswordDs(@Named('authorizedDio') Dio dio) =>
+      ResetPasswordDsImpl(dio);
 }
