@@ -17,9 +17,8 @@ The app follows **Clean Architecture**, **BLoC**, **Dependency Injection**, and 
 - Technical Implementation  
 - UI Preview  
 - Project Structure  
+- Packages Used
 - Setup Guide  
-- Packages Used  
-- Notes  
 
 ---
 
@@ -190,6 +189,7 @@ lib/
 | url_launcher | Open browser links |
 | flutter_screenutil | Responsive UI |
 | equatable | Value comparison |
+| multiavatar | avaters |
 
 
 
@@ -210,6 +210,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 4️⃣ Run Project
 flutter run
+
 
 
 
