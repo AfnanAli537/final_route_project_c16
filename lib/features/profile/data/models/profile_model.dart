@@ -30,7 +30,7 @@ class ProfileModel {
       "email": email,
       "name": name,
       "phone": phone,
-      "avaterId": avaterId,
+      "avaterId": avaterId == 0 ? 1 : avaterId,
     };
     return map;
   }

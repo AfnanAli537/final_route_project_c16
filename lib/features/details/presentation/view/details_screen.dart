@@ -8,6 +8,8 @@ import 'package:final_route_projcet_c16/features/details/presentation/widgets/ge
 import 'package:final_route_projcet_c16/features/details/presentation/widgets/screenshots_list.dart';
 import 'package:final_route_projcet_c16/features/details/presentation/widgets/suggestions_list.dart';
 import 'package:final_route_projcet_c16/features/details/presentation/widgets/summary_section.dart';
+import 'package:final_route_projcet_c16/features/favorites/presentation/view_model/bloc/favorite_bloc.dart';
+import 'package:final_route_projcet_c16/features/favorites/presentation/view_model/bloc/favorite_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +42,17 @@ class DetailsScreen extends StatelessWidget {
                 body: CustomScrollView(
                   slivers: [
                     if (movie.poster != null && movie.poster!.isNotEmpty)
-                      SliverToBoxAdapter(child: DetailsHeader(movie: movie)),
+                      SliverToBoxAdapter(
+                        child: DetailsHeader(
+                          movie: movie,
+                          onRefresh: () {
+                            context.read<FavoriteBloc>().add(
+                              LoadFavoritesEvent(),
+                            );
+                          },
+                        ),
+                      ),
+
                     SliverToBoxAdapter(child: SizedBox(height: 20.h)),
 
                     if (movie.screenshots!.isNotEmpty)

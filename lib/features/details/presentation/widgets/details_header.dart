@@ -2,20 +2,27 @@ import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/features/details/domain/entities/movie_details_entity.dart';
 import 'package:final_route_projcet_c16/features/details/presentation/widgets/is_watch_later.dart';
 import 'package:final_route_projcet_c16/features/details/presentation/widgets/url_button.dart';
+import 'package:final_route_projcet_c16/features/favorites/data/models/favorite_models.dart';
+import 'package:final_route_projcet_c16/features/profile/presentation/view_model/history/history_bloc.dart';
+import 'package:final_route_projcet_c16/features/profile/presentation/view_model/history/history_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailsHeader extends StatelessWidget {
   final MovieDetailsEntity movie;
+  final VoidCallback? onRefresh;
 
-  const DetailsHeader({super.key, required this.movie});
+  const DetailsHeader({super.key, required this.movie, this.onRefresh});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Image.network(
-          movie.poster ?? "",
+          (movie.poster != null && movie.poster!.isNotEmpty)
+              ? movie.poster!
+              : "https://via.placeholder.com/500x700",
           width: double.infinity,
           height: 450.h,
 
@@ -37,12 +44,35 @@ class DetailsHeader extends StatelessWidget {
           top: 50,
           left: 10,
           child: GestureDetector(
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              context.read<HistoryBloc>().add(
+                AddHistoryItem(
+                  movie.title,
+                  movie.poster ?? "",
+                  movie.rating.toString(),
+                  movie.id.toString(),
+                ),
+              );
+              Navigator.pop(context, true);
+            },
             child: const Icon(Icons.arrow_back_ios, color: Colors.white),
           ),
         ),
 
-        Positioned(top: 50, right: 10, child: BookmarkButton()),
+        Positioned(
+          top: 50,
+          right: 10,
+          child: BookmarkButton(
+            onChanged: onRefresh,
+            movie: FavoriteModel(
+              movieId: "${movie.id}",
+              name: movie.title,
+              rating: movie.rating,
+              imageURL: movie.poster ?? "",
+              year: movie.year,
+            ),
+          ),
+        ),
 
         Center(
           child: Padding(
@@ -99,7 +129,7 @@ class DetailsHeader extends StatelessWidget {
               ),
               SizedBox(height: 10),
               WatchButton(url: movie.url),
-                  Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

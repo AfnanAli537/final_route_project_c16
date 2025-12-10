@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:final_route_projcet_c16/core/network/network_config.dart';
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/data/data_sources/reset_password_ds.dart';
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/data/data_sources/reset_password_ds_impl.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../features/update_profile/data/data_sources/reset_password_ds.dart' ;
-import '../../features/update_profile/data/data_sources/reset_password_ds_impl.dart';
 
 @module
 abstract class RegisterModule {
@@ -35,3 +34,6 @@ abstract class ResetPasswordModule {
   ResetPasswordDs provideResetPasswordDs(@Named('authorizedDio') Dio dio) =>
       ResetPasswordDsImpl(dio);
 }
+
+@lazySingleton
+Dio get dioInstance => Dio();

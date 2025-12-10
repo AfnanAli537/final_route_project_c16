@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
 import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_state.dart';
 import 'package:final_route_projcet_c16/core/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,13 +22,29 @@ class Browse extends StatefulWidget {
 }
 
 class _BrowseState extends State<Browse> {
+  List<String> genreList = [];
   late String selectedGenre = "";
 
   @override
   void initState() {
     super.initState();
     selectedGenre = widget.selectedGenre ?? "";
+    loadGenres().then((list) {
+      setState(() {
+        genreList = list;
+        if (selectedGenre.isEmpty && genreList.isNotEmpty) {
+          selectedGenre = genreList.first;
+        }
+      });
+    });
   }
+
+  Future<List<String>> loadGenres() async {
+    final jsonString = await rootBundle.loadString("assets/json/genres.json");
+    final Map<String, dynamic> jsonMap = json.decode(jsonString);
+    return List<String>.from(jsonMap['genres']);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,29 +77,22 @@ class _BrowseState extends State<Browse> {
             if (state is BrowseError) {
               return Center(child: Text(state.message));
             }
+
             if (state is BrowseLoaded) {
               final movies = state.movies;
-              final genres = <String>{};
-              for (var m in movies) {
-                genres.addAll(m.genres);
-              }
-              final genreList = genres.toList();
-              if (selectedGenre.isEmpty && genreList.isNotEmpty) {
-                selectedGenre = genreList.first;
-              }
               final filteredMovies = movies
-                  .where(
-                    (m) => m.genres
-                        .map((g) => g.toLowerCase())
-                        .contains(selectedGenre.toLowerCase()),
-                  )
+                  .where((m) => m.genres
+                  .map((g) => g.toLowerCase())
+                  .contains(selectedGenre.toLowerCase()))
                   .toList();
+
               return Column(
                 children: [
                   SizedBox(
-                    height: 67.h,
+                    height: 68.h,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
+                      itemCount: genreList.length,
                       itemBuilder: (context, index) {
                         final genre = genreList[index];
                         final isSelected = genre == selectedGenre;
@@ -122,7 +134,6 @@ class _BrowseState extends State<Browse> {
                           ),
                         );
                       },
-                      itemCount: genreList.length,
                     ),
                   ),
                   Expanded(
@@ -131,12 +142,12 @@ class _BrowseState extends State<Browse> {
                       child: GridView.builder(
                         padding: const EdgeInsets.all(12),
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 12,
-                              mainAxisSpacing: 12,
-                              childAspectRatio: 0.65,
-                            ),
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.65,
+                        ),
                         itemCount: filteredMovies.length,
                         itemBuilder: (context, index) {
                           final movie = filteredMovies[index];
@@ -152,6 +163,7 @@ class _BrowseState extends State<Browse> {
                 ],
               );
             }
+
             return Container();
           },
         ),

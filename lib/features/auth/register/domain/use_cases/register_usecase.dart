@@ -23,7 +23,7 @@ class RegisterParams {
         "password": password,
         "confirmPassword": confirmPassword,
         "phone": phone,
-        "avatarId": avatarId
+        "avaterId": avatarId
       };
 }
 

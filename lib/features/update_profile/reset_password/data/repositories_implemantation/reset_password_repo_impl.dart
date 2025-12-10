@@ -1,5 +1,5 @@
-import 'package:final_route_projcet_c16/features/update_profile/data/data_sources/reset_password_ds.dart';
-import 'package:final_route_projcet_c16/features/update_profile/domain/repositories_interface/reset_password_repo.dart';
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/data/data_sources/reset_password_ds.dart';
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/domain/repositories_interface/reset_password_repo.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: ResetPasswordRepo)

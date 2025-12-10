@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/delete_profile_use_case.dart';
-import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/reset_password_use_case.dart';
 import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_event.dart';
 import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_state.dart';
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/domain/use_cases/reset_password_use_case.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/use_cases/update_profile_use_case.dart';
