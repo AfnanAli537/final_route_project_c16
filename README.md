@@ -7,8 +7,8 @@ The app follows **Clean Architecture**, **BLoC**, **Dependency Injection**, and 
 
 # 👥 Team Members
 - **Afnan Ali**  
-- **Mariam**  
-- **ABDO Allah**
+- **Mariam Ragab**  
+- **Abdallah Ahmed**
 
 ---
 
@@ -210,6 +210,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 4️⃣ Run Project
 flutter run
+
 
 
 
