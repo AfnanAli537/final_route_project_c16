@@ -1,0 +1,17 @@
+class Movie {
+  final int id;
+  final String title;
+  final String image;
+  final num rating;
+  final List<String> genres;
+
+  Movie({
+    required this.id,
+    required this.title,
+    required this.image,
+    required this.rating,
+    required this.genres,
+  });
+
+  static fromJson(e) {}
+}
