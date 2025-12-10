@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:final_route_projcet_c16/core/network/endpoints.dart';
+import 'package:final_route_projcet_c16/core/services/session_service.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../core/network/endpoints.dart';
-import '../../../../core/services/session_service.dart';
 import 'reset_password_ds.dart';
 
 class ResetPasswordDsImpl implements ResetPasswordDs {

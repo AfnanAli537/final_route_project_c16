@@ -48,6 +48,24 @@ import 'package:final_route_projcet_c16/features/details/presentation/view_model
     as _i1028;
 import 'package:final_route_projcet_c16/features/details/presentation/view_model/suggestions_bloc/movie_suggestions_bloc.dart'
     as _i709;
+import 'package:final_route_projcet_c16/features/favorites/data/data_sources/favorites_remote_ds.dart'
+    as _i51;
+import 'package:final_route_projcet_c16/features/favorites/data/data_sources/favorites_remote_ds_impl.dart'
+    as _i549;
+import 'package:final_route_projcet_c16/features/favorites/data/repositories_implementation/favorite_repo_impl.dart'
+    as _i516;
+import 'package:final_route_projcet_c16/features/favorites/domain/repository_interface/favorite_repo.dart'
+    as _i522;
+import 'package:final_route_projcet_c16/features/favorites/domain/use_cases/add_favorite_use_case.dart'
+    as _i809;
+import 'package:final_route_projcet_c16/features/favorites/domain/use_cases/get_favorite_use_case.dart'
+    as _i171;
+import 'package:final_route_projcet_c16/features/favorites/domain/use_cases/is_favorite_use_case.dart'
+    as _i955;
+import 'package:final_route_projcet_c16/features/favorites/domain/use_cases/remove_favorite_use_case.dart'
+    as _i973;
+import 'package:final_route_projcet_c16/features/favorites/presentation/view_model/bloc/favorite_bloc.dart'
+    as _i1060;
 import 'package:final_route_projcet_c16/features/main/home/data/data_sources/data_sources.dart'
     as _i1033;
 import 'package:final_route_projcet_c16/features/main/home/data/data_sources/movies_remote_data_source.dart'
@@ -72,6 +90,8 @@ import 'package:final_route_projcet_c16/features/profile/domain/use_cases/get_pr
     as _i392;
 import 'package:final_route_projcet_c16/features/profile/presentation/view_model/bloc/profile_bloc.dart'
     as _i646;
+import 'package:final_route_projcet_c16/features/profile/presentation/view_model/history/history_bloc.dart'
+    as _i765;
 import 'package:final_route_projcet_c16/features/search/data/data_sources/search_remote_data_source.dart'
     as _i798;
 import 'package:final_route_projcet_c16/features/search/data/data_sources/search_remote_data_source_impl.dart'
@@ -84,20 +104,20 @@ import 'package:final_route_projcet_c16/features/search/domain/use_cases/search_
     as _i322;
 import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart'
     as _i659;
-import 'package:final_route_projcet_c16/features/update_profile/data/data_sources/reset_password_ds.dart'
-    as _i469;
-import 'package:final_route_projcet_c16/features/update_profile/data/repositories_implemantation/reset_password_repo_impl.dart'
-    as _i552;
-import 'package:final_route_projcet_c16/features/update_profile/domain/repositories_interface/reset_password_repo.dart'
-    as _i834;
 import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/delete_profile_use_case.dart'
     as _i95;
-import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/reset_password_use_case.dart'
-    as _i694;
 import 'package:final_route_projcet_c16/features/update_profile/domain/use_cases/update_profile_use_case.dart'
     as _i89;
 import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_bloc.dart'
     as _i963;
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/data/data_sources/reset_password_ds.dart'
+    as _i174;
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/data/repositories_implemantation/reset_password_repo_impl.dart'
+    as _i908;
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/domain/repositories_interface/reset_password_repo.dart'
+    as _i353;
+import 'package:final_route_projcet_c16/features/update_profile/reset_password/domain/use_cases/reset_password_use_case.dart'
+    as _i474;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -115,8 +135,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.prefs,
       preResolve: true,
     );
+    gh.factory<_i765.HistoryBloc>(() => _i765.HistoryBloc());
     gh.lazySingleton<_i361.Dio>(() => registerModule.dio);
     gh.lazySingleton<_i1059.BrowseRemoteDS>(() => _i330.BrowserRemoteDSImpl());
+    gh.lazySingleton<_i51.FavoriteRemoteDs>(
+      () => _i549.FavoriteRemoteDsImpl(gh<_i361.Dio>()),
+    );
     gh.lazySingleton<_i937.ProfileRemoteDs>(
       () => _i696.ProfileRemoteDsImpl(gh<_i361.Dio>()),
     );
@@ -134,8 +158,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i945.SearchRepo>(
       () => _i29.SearchRepoImpl(gh<_i798.SearchRemoteDataSource>()),
     );
+    gh.lazySingleton<_i522.FavoriteRepo>(
+      () => _i516.FavoriteRepoImpl(gh<_i51.FavoriteRemoteDs>()),
+    );
     gh.lazySingleton<_i791.ProfileRepo>(
       () => _i393.ProfileRepositoryImpl(gh<_i937.ProfileRemoteDs>()),
+    );
+    gh.factory<_i809.AddFavoriteUseCase>(
+      () => _i809.AddFavoriteUseCase(gh<_i522.FavoriteRepo>()),
+    );
+    gh.factory<_i171.GetFavoritesUseCase>(
+      () => _i171.GetFavoritesUseCase(gh<_i522.FavoriteRepo>()),
+    );
+    gh.factory<_i955.IsFavoriteUseCase>(
+      () => _i955.IsFavoriteUseCase(gh<_i522.FavoriteRepo>()),
+    );
+    gh.factory<_i973.RemoveFavoriteUseCase>(
+      () => _i973.RemoveFavoriteUseCase(gh<_i522.FavoriteRepo>()),
     );
     gh.lazySingleton<_i858.BrowserRepo>(
       () => _i380.BrowserRepoImpl(gh<_i1059.BrowseRemoteDS>()),
@@ -152,7 +191,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i211.SuggestionsRepository>(
       () => _i463.SuggestionsRepositoryImpl(gh<_i241.SuggestionsDataSource>()),
     );
-    gh.lazySingleton<_i469.ResetPasswordDs>(
+    gh.lazySingleton<_i174.ResetPasswordDs>(
       () => resetPasswordModule.provideResetPasswordDs(
         gh<_i361.Dio>(instanceName: 'authorizedDio'),
       ),
@@ -166,6 +205,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i646.ProfileBloc>(
       () => _i646.ProfileBloc(gh<_i392.GetProfile>()),
     );
+    gh.lazySingleton<_i353.ResetPasswordRepo>(
+      () => _i908.ResetPasswordRepoImpl(gh<_i174.ResetPasswordDs>()),
+    );
     gh.factory<_i147.BrowseMoviesUseCase>(
       () => _i147.BrowseMoviesUseCase(gh<_i858.BrowserRepo>()),
     );
@@ -175,8 +217,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.MoviesDataSource>(
       () => _i40.MoviesRemoteDataSource(gh<_i759.ApiClient>()),
     );
-    gh.lazySingleton<_i834.ResetPasswordRepo>(
-      () => _i552.ResetPasswordRepoImpl(gh<_i469.ResetPasswordDs>()),
+    gh.lazySingleton<_i474.ResetPasswordUseCase>(
+      () => _i474.ResetPasswordUseCase(gh<_i353.ResetPasswordRepo>()),
+    );
+    gh.factory<_i963.UpdateProfileBloc>(
+      () => _i963.UpdateProfileBloc(
+        gh<_i89.UpdateProfileUseCase>(),
+        gh<_i95.DeleteProfile>(),
+        gh<_i474.ResetPasswordUseCase>(),
+      ),
+    );
+    gh.factory<_i1060.FavoriteBloc>(
+      () => _i1060.FavoriteBloc(
+        gh<_i809.AddFavoriteUseCase>(),
+        gh<_i171.GetFavoritesUseCase>(),
+        gh<_i955.IsFavoriteUseCase>(),
+        gh<_i973.RemoveFavoriteUseCase>(),
+      ),
     );
     gh.factory<_i709.MovieSuggestionsBloc>(
       () => _i709.MovieSuggestionsBloc(gh<_i12.GetSuggestionsUseCase>()),
@@ -193,9 +250,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i659.SearchBloc>(
       () => _i659.SearchBloc(gh<_i322.SearchMoviesUseCase>()),
     );
-    gh.lazySingleton<_i694.ResetPasswordUseCase>(
-      () => _i694.ResetPasswordUseCase(gh<_i834.ResetPasswordRepo>()),
-    );
     gh.factory<_i645.GetMoviesUseCase>(
       () => _i645.GetMoviesUseCase(gh<_i746.MoviesRepository>()),
     );
@@ -204,13 +258,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i689.MovieDetailsUseCase>(
       () => _i689.MovieDetailsUseCase(gh<_i818.MovieDetailsRepository>()),
-    );
-    gh.factory<_i963.UpdateProfileBloc>(
-      () => _i963.UpdateProfileBloc(
-        gh<_i89.UpdateProfileUseCase>(),
-        gh<_i95.DeleteProfile>(),
-        gh<_i694.ResetPasswordUseCase>(),
-      ),
     );
     gh.factory<_i1028.MovieDetailsBloc>(
       () => _i1028.MovieDetailsBloc(gh<_i689.MovieDetailsUseCase>()),

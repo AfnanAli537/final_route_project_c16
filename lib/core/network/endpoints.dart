@@ -6,6 +6,10 @@ class Endpoints {
   static const String login = "auth/login";
   static const String register = "auth/register";
   static const String resetPassword = "auth/reset-password";
+  static const String addFavorite = "favorites/add";
+  static const String getFavorites = "favorites/all";
+  static const String removeMovieFromFavorite = "favorites/remove/movieId";
+  static const String movieIsFavorite = "favorites/is-favorite/movieId";
   static const String profile = "profile";
   static const String details = "/movie_details.json";
   static const String movieSuggestions = "/movie_suggestions.json";

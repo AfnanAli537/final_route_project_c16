@@ -46,8 +46,8 @@ class ProfileRemoteDsImpl implements ProfileRemoteDs {
       return response.data['message'];
     } on DioException catch (e) {
       final message = e.response?.data is Map
-          ? e.response?.data["message"] ?? "Failed to get profile"
-          : "Failed to get profile";
+          ? e.response?.data["message"] ?? "Failed to update profile"
+          : "Failed to update profile";
       throw Exception(message);
     } catch (e) {
       throw Exception("Unexpected error, please try again");
