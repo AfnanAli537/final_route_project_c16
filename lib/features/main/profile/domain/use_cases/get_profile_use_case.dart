@@ -3,12 +3,12 @@ import 'package:final_route_projcet_c16/features/main/profile/domain/repositorie
 import 'package:injectable/injectable.dart';
 
 @injectable
-class UpdateProfileUseCase {
+class GetProfile {
   final ProfileRepo repository;
 
-  UpdateProfileUseCase(this.repository);
+  GetProfile(this.repository);
 
-  Future<String> call(Profile profile) async {
-    return await repository.updateProfile(profile);
+  Future<Profile> call() async {
+    return await repository.getProfile();
   }
 }

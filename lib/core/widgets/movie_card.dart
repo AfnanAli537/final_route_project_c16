@@ -1,7 +1,7 @@
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
-import 'package:final_route_projcet_c16/features/profile/presentation/view_model/history/history_bloc.dart';
-import 'package:final_route_projcet_c16/features/profile/presentation/view_model/history/history_event.dart';
+import 'package:final_route_projcet_c16/features/main/profile/presentation/view_model/history/history_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/profile/presentation/view_model/history/history_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

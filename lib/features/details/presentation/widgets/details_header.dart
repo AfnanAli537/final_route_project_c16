@@ -3,8 +3,8 @@ import 'package:final_route_projcet_c16/features/details/domain/entities/movie_d
 import 'package:final_route_projcet_c16/features/details/presentation/widgets/is_watch_later.dart';
 import 'package:final_route_projcet_c16/features/details/presentation/widgets/url_button.dart';
 import 'package:final_route_projcet_c16/features/favorites/data/models/favorite_models.dart';
-import 'package:final_route_projcet_c16/features/profile/presentation/view_model/history/history_bloc.dart';
-import 'package:final_route_projcet_c16/features/profile/presentation/view_model/history/history_event.dart';
+import 'package:final_route_projcet_c16/features/main/profile/presentation/view_model/history/history_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/profile/presentation/view_model/history/history_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

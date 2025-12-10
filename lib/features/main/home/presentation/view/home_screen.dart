@@ -15,23 +15,41 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-final List<String> allGenres = [
-  "action",
-  "animation",
-  "comedy",
-  "drama",
-  "horror",
-  "thriller",
-  "sci-fi",
-  "romance",
-];
+    final List<String> allGenres = [
+      "Comedy",
+      "Romance",
+      "Thriller",
+      "Action",
+      "Documentary",
+      "Crime",
+      "Drama",
+      "Horror",
+      "Adventure",
+      "Sci-Fi",
+      "Biography",
+      "History",
+      "Sport",
+      "Family",
+      "Music",
+      "War",
+      "Animation",
+      "Mystery",
+      "Fantasy",
+      "Talk-Show",
+      "Musical",
+      "Western",
+      "Film-Noir",
+      "News",
+      "Reality-TV",
+      "Game-Show",
+    ];
 
-final random = Random();
-final firstGenre = allGenres[random.nextInt(allGenres.length)];
-String secondGenre;
-do {
-  secondGenre = allGenres[random.nextInt(allGenres.length)];
-} while (secondGenre == firstGenre); 
+    final random = Random();
+    final firstGenre = allGenres[random.nextInt(allGenres.length)];
+    String secondGenre;
+    do {
+      secondGenre = allGenres[random.nextInt(allGenres.length)];
+    } while (secondGenre == firstGenre);
 
     context.read<MoviesBloc>().add(LoadAvailableMovies());
     context.read<MoviesBloc>().add(LoadMoviesByGenre(firstGenre));
@@ -137,6 +155,7 @@ do {
     );
   }
 }
+
 extension StringCasingExtension on String {
   String capitalize() => "${this[0].toUpperCase()}${substring(1)}";
 }

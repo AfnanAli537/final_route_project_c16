@@ -1,18 +1,18 @@
 import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
-import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
+import 'package:final_route_projcet_c16/features/main/browser/presentation/view/browse.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view/home_screen.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view_model/bloc/home_bloc.dart';
-import 'package:final_route_projcet_c16/features/profile/presentation/view/profile_screen.dart';
-import 'package:final_route_projcet_c16/features/profile/presentation/view_model/bloc/profile_bloc.dart';
-import 'package:final_route_projcet_c16/features/search/presentation/view/search.dart';
-import 'package:final_route_projcet_c16/features/search/presentation/view_model/bloc/search_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/profile/presentation/view/profile_screen.dart';
+import 'package:final_route_projcet_c16/features/main/profile/presentation/view_model/bloc/profile_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/search/presentation/view/search.dart';
+import 'package:final_route_projcet_c16/features/main/search/presentation/view_model/bloc/search_bloc.dart';
 import 'package:final_route_projcet_c16/features/update_profile/presentation/view_model/bloc/update_profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/di/di.dart';
-import '../browser/presentation/view_model/bloc/browse_bloc.dart';
-import '../browser/presentation/view_model/bloc/browse_event.dart';
+import 'browser/presentation/view_model/bloc/browse_bloc.dart';
+import 'browser/presentation/view_model/bloc/browse_event.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});

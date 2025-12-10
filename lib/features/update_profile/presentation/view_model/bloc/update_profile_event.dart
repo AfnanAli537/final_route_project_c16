@@ -1,4 +1,4 @@
-import 'package:final_route_projcet_c16/features/profile/domain/entities/profile.dart';
+import 'package:final_route_projcet_c16/features/main/profile/domain/entities/profile.dart';
 
 abstract class UpdateProfileEvent {}
 

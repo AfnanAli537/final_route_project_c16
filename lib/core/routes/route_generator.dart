@@ -12,11 +12,11 @@ import 'package:final_route_projcet_c16/features/onbording/presentation/blocs/on
 import 'package:final_route_projcet_c16/features/onbording/presentation/blocs/onboarding_event.dart';
 import 'package:final_route_projcet_c16/features/onbording/data/onboarding_repository_impl.dart';
 import 'package:final_route_projcet_c16/features/onbording/domain/use_cases/get_onboarding_data_usecase.dart';
-import 'package:final_route_projcet_c16/features/browser/presentation/view/browse.dart';
-import 'package:final_route_projcet_c16/features/browser/presentation/view_model/bloc/browse_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/browser/presentation/view/browse.dart';
+import 'package:final_route_projcet_c16/features/main/browser/presentation/view_model/bloc/browse_bloc.dart';
 import 'package:final_route_projcet_c16/features/main/main_layout.dart';
 
-import '../../features/browser/presentation/view_model/bloc/browse_event.dart';
+import '../../features/main/browser/presentation/view_model/bloc/browse_event.dart';
 import '../di/di.dart';
 
 abstract class RoutesManager {

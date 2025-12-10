@@ -1,4 +1,4 @@
-import 'package:final_route_projcet_c16/features/profile/domain/repositories_interface/profile_repo.dart';
+import 'package:final_route_projcet_c16/features/main/profile/domain/repositories_interface/profile_repo.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable

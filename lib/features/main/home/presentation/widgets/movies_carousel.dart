@@ -3,6 +3,8 @@ import 'package:final_route_projcet_c16/core/constants/color_manager.dart';
 import 'package:final_route_projcet_c16/core/routes/app_routes.dart';
 import 'package:final_route_projcet_c16/features/main/home/domain/entities/movie_entity.dart';
 import 'package:final_route_projcet_c16/features/main/home/presentation/view_model/bloc/home_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/profile/presentation/view_model/history/history_bloc.dart';
+import 'package:final_route_projcet_c16/features/main/profile/presentation/view_model/history/history_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,8 +32,22 @@ class MoviesCarousel extends StatelessWidget {
       itemBuilder: (context, index, _) {
         final movie = movies[index];
         return GestureDetector(
-          onTap: () =>
-              Navigator.pushNamed(context, AppRoutes.details, arguments: movie.id),
+          onTap: () async {
+        context.read<HistoryBloc>().add(
+          AddHistoryItem(
+            movie.title,
+            movie.image!,
+            movie.rating.toString(),
+            movie.id.toString(),
+          ),
+        );
+        Navigator.pushNamed(
+          context,
+          AppRoutes.details,
+          arguments: movie.id,
+        );
+      },
+              // Navigator.pushNamed(context, AppRoutes.details, arguments: movie.id),
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             child: Stack(

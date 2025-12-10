@@ -12,16 +12,21 @@ class Regex {
     }
   }
 
-  static String? validatePhoneNumber(String? val) {
-    if (val == null) {
+static String? validatePhoneNumber(String? val) {
+    if (val == null || val.trim().isEmpty) {
       return 'this field is required';
-    } else if (int.tryParse(val.trim()) == null) {
-      return 'enter numbers only';
-    } else if (val.trim().length != 11) {
-      return 'enter value must equal 11 digit';
-    } else {
-      return null;
     }
+    String trimmed = val.trim();
+    if (trimmed.startsWith('+20')) {
+      trimmed = trimmed.substring(3);
+    }
+    if (int.tryParse(trimmed) == null) {
+      return 'enter numbers only';
+    }
+    if (trimmed.length != 10) {
+      return 'enter value must be 11 digit including country code or 10 without it';
+    }
+    return null;
   }
   static String? validatePassword(String? val) {
     RegExp passwordRegex = RegExp(r'^(?=.*[a-zA-Z])(?=.*[0-9])');
