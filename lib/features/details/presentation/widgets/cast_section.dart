@@ -11,7 +11,7 @@ class CastSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,42 +24,41 @@ class CastSection extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10.h),
-          SizedBox(
-            height: 300.h,
-            child: ListView.builder(
-              itemCount: cast.length,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                final actor = cast[index];
-
-                return Container(
-                  margin: EdgeInsets.only(bottom: 12.h),
-                  padding: EdgeInsets.all(12.h),
-                  decoration: BoxDecoration(
-                    color: ColorManager.border,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.r),
-                        child: Image.network(
-                          actor.profileImage,
-                          width: 70.h,
-                          height: 70.h,
-                          fit: BoxFit.cover,
-                        ),
+          Column(
+            children: cast.map((actor) {
+              return Container(
+                margin: EdgeInsets.only(bottom: 12.h),
+                padding: EdgeInsets.all(12.h),
+                decoration: BoxDecoration(
+                  color: ColorManager.border,
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.r),
+                      child: Image.network(
+                        actor.profileImage.isNotEmpty ? actor.profileImage :"https://yts.lt/assets/images/actors/thumb/nm0000246.jpg",
+                        width: 70.h,
+                        height: 70.h,
+                        fit: BoxFit.cover,
                       ),
-                      SizedBox(width: 12),
-                      Text(
-                        "Name: ${actor.name}\nCharacter: ${actor.character}",
+                    ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: Text(
+                        "Name: ${actor.name}\n"
+                        "Character: ${actor.character}",
                         style: const TextStyle(color: Colors.white),
+                        softWrap: true,
+                        overflow: TextOverflow.visible,
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),

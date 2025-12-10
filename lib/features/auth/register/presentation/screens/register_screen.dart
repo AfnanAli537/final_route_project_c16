@@ -161,9 +161,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               final password = passwordController.text.trim();
                               final confirmPassword = confirmPasswordController.text.trim();
                               final phone = phoneController.text.trim();
-
+                              final avtar =selectedAvatar  ;
                               if (name.isEmpty || email.isEmpty || password.isEmpty ||
-                                  confirmPassword.isEmpty || phone.isEmpty) {
+                                  confirmPassword.isEmpty || phone.isEmpty||avtar==0) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('Please fill all fields')),
                                 );
