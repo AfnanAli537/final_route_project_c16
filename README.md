@@ -171,6 +171,8 @@ Each feature has its own:
 ---
 
 ## 📂 Project Structure
+
+```text
 lib/
 │
 ├── core/
@@ -221,6 +223,7 @@ lib/
 │
 ├── main.dart
 └── movies_app.dart
+```
 
 ---
 
@@ -256,6 +259,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 4️⃣ Run Project
 flutter run
+
 
 
 
