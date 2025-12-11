@@ -114,98 +114,115 @@ Each feature has its own:
 
 # 🎨 UI Preview (Based on Figma)
 
-### 🏠 Home
-<img src="screenshots/Home.png" width="300">  
+## 🏠 Home
+<p>
+  <img src="screenshots/Home.png" width="250">
+</p>
 
-### 🎬 Details
-<img src="screenshots/Movie%20Detials.png" width="300">
+## 🎬 Details
+<p>
+  <img src="screenshots/Movie%20Detials.png" width="250">
+</p>
 
-### 🔍 Search
-<img src="screenshots/Search.png" width="300">
-<img src="screenshots/Splash%20Screen.png" width="300">
+## 🔍 Search
+<p>
+  <img src="screenshots/Search.png" width="250">
+  <img src="screenshots/Search%20(1).png" width="250">
+</p>
 
-### 📚 Browse
-<img src="screenshots/Browse.png" width="300">
+## 📚 Browse
+<p>
+  <img src="screenshots/Browse.png" width="250">
+</p>
 
-### 👤 Profile
-<img src="screenshots/Profile.png" width="300">
-<img src="screenshots/Profile%20(1).png" width="300">
+## 👤 Profile
+<p>
+  <img src="screenshots/Profile.png" width="250">
+  <img src="screenshots/Profile%20(1).png" width="250">
+</p>
 
-### ✏️ Edit Profile
-<img src="screenshots/Update%20Profile.png" width="300">
-<img src="screenshots/Update%20Profile%20(1).png" width="300">
+## ✏️ Edit Profile
+<p>
+  <img src="screenshots/Update%20Profile.png" width="250">
+  <img src="screenshots/Update%20Profile%20(1).png" width="250">
+</p>
 
-### 🔑 Authentication
-<img src="screenshots/Login.png" width="300">
-<img src="screenshots/Register.png" width="300">
-<img src="screenshots/Forget%20Password.png" width="300">
+## 🔑 Authentication
+<p>
+  <img src="screenshots/Login.png" width="250">
+  <img src="screenshots/Register.png" width="250">
+  <img src="screenshots/Forget%20Password.png" width="250">
+</p>
 
-### 📸 splash & onBoarding
-<img src="screenshots/Splash%20Screen.png" width="300">
-<img src="screenshots/OnBoarding.png" width="300">
-<img src="screenshots/OnBoarding%20(1).png" width="300">
-<img src="screenshots/OnBoarding%20(2).png" width="300">
-<img src="screenshots/OnBoarding%20(3).png" width="300">
-<img src="screenshots/OnBoarding%20(4).png" width="300">
-<img src="screenshots/OnBoarding%20(5).png" width="300">
+## 📸 Splash & OnBoarding
+<p>
+  <img src="screenshots/Splash%20Screen.png" width="250">
+  <img src="screenshots/OnBoarding.png" width="250">
+  <img src="screenshots/OnBoarding%20(1).png" width="250">
+  <img src="screenshots/OnBoarding%20(2).png" width="250">
+  <img src="screenshots/OnBoarding%20(3).png" width="250">
+  <img src="screenshots/OnBoarding%20(4).png" width="250">
+  <img src="screenshots/OnBoarding%20(5).png" width="250">
+</p>
+
 
 
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
+
+
 lib/
 │
 ├── core/
-│ ├── network/
-│ ├── error/
-│ ├── constants/
-│ ├── utils/
-│ 
+│   ├── network/
+│   ├── error/
+│   ├── constants/
+│   └── utils/
 │
 ├── features/
-│ ├── auth/
-│ ├── home/
-|       ├── data/
-|       │   ├── datasources/
-|       │   │   └── home_remote_data_source.dart
-|       │   ├── models/
-|       │   │   └── movie_model.dart
-|       │   └── repositories/
-|       │       └── home_repository_impl.dart
-|       │
-|       ├── domain/
-|       │   ├── entities/
-|       │   │   └── movie_entity.dart
-|       │   ├── repositories/
-|       │   │   └── home_repository.dart
-|       │  └── usecases/
-|       │      └── get_movies_usecase.dart
-|       │
-|       ├── presentation/
-|       │  ├── blocs/
-|       │   │   ├── home_bloc.dart
-|       │   │   ├── home_event.dart
-|       │   │   └── home_state.dart
-|       │   ├── screens/
-|       │   │   └── home_screen.dart
-|       │   └── widgets/
-|       │       ├── movie_card.dart
-|       │       ├── movies_carousel.dart
-|       │     
-│ ├── browse/
-│ ├── details/
-│ ├── search/
-│ ├── profile/
-│ │ ├── view_profile/
-│ │ └── edit_profile/
+│   ├── auth/
+│   ├── home/
+│   │   ├── data/
+│   │   │   ├── datasources/
+│   │   │   │   └── home_remote_data_source.dart
+│   │   │   ├── models/
+│   │   │   │   └── movie_model.dart
+│   │   │   └── repositories/
+│   │   │       └── home_repository_impl.dart
+│   │   │
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   │   └── movie_entity.dart
+│   │   │   ├── repositories/
+│   │   │   │   └── home_repository.dart
+│   │   │   └── usecases/
+│   │   │       └── get_movies_usecase.dart
+│   │   │
+│   │   ├── presentation/
+│   │   │   ├── blocs/
+│   │   │   │   ├── home_bloc.dart
+│   │   │   │   ├── home_event.dart
+│   │   │   │   └── home_state.dart
+│   │   │   ├── screens/
+│   │   │   │   └── home_screen.dart
+│   │   │   └── widgets/
+│   │   │       ├── movie_card.dart
+│   │   │       └── movies_carousel.dart
+│   │
+│   ├── browse/
+│   ├── details/
+│   ├── search/
+│   ├── profile/
+│   │   ├── view_profile/
+│   │   └── edit_profile/
 │
 ├── di/
-│ └── injectable.config.dart
+│   └── injectable.config.dart
 │
 ├── main.dart
 └── movies_app.dart
-
 
 ---
 
@@ -241,6 +258,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 4️⃣ Run Project
 flutter run
+
 
 
 
