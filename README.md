@@ -41,13 +41,12 @@ The app follows **Clean Architecture**, **BLoC**, **Dependency Injection**, and 
 ## 🎬 3. Movie Details
 - Full movie preview image  
 - Rating, year, runtime  
-- Genres using **Wrap**  
+- Genres   
 - Summary / Description  
-- Open external movie URL using **url_launcher**  
-- Beautiful dark UI matching Figma  
+- Open external movie URL using **url_launcher**   
 
 ## 🔍 4. Search
-- Real-time search with debounce  
+- Real-time search   
 - Movie previews  
 - Search suggestions  
 - Handles empty results  
@@ -61,14 +60,14 @@ The app follows **Clean Architecture**, **BLoC**, **Dependency Injection**, and 
 
 ## 👤 6. Profile
 - Show user profile info  
-- Profile picture + name + email  
-- Saved preferences (dark mode)  
-- Uses local storage  
+- Profile picture + name   
+- Uses local storage for history
+- watch later lists
 
 ## ✏️ 7. Edit Profile
 - Edit username  
-- Edit profile image  
-- Update data locally or via API  
+- Edit profile image
+- Reset Password
 - Instant UI refresh  
 
 ---
@@ -116,36 +115,41 @@ Each feature has its own:
 # 🎨 UI Preview (Based on Figma)
 
 ### 🏠 Home
-- Main header movie slider  
-- Movie horizontal lists  
-- Custom item card  
+<img src="screenshots/Home.png" width="300">  
 
 ### 🎬 Details
-- Full-screen poster  
-- Info row (rating, year, runtime)  
-- Genre chips  
-- Cast section  
-- Watch button  
+<img src="screenshots/Movie%20Detials.png" width="300">
 
 ### 🔍 Search
-- Search bar  
-- Suggestions  
-- Movie list with thumbnails  
+<img src="screenshots/Search.png" width="300">
+<img src="screenshots/Splash%20Screen.png" width="300">
 
 ### 📚 Browse
-- Category chips  
-- Movies under selected category  
+<img src="screenshots/Browse.png" width="300">
 
 ### 👤 Profile
-- Profile photo  
-- Username  
-- Email  
-- Edit button  
+<img src="screenshots/Profile.png" width="300">
+<img src="screenshots/Profile%20(1).png" width="300">
 
 ### ✏️ Edit Profile
-- Editable fields  
-- Image picker  
-- Update button  
+<img src="screenshots/Update%20Profile.png" width="300">
+<img src="screenshots/Update%20Profile%20(1).png" width="300">
+
+### 🔑 Authentication
+<img src="screenshots/Login.png" width="300">
+<img src="screenshots/Register.png" width="300">
+<img src="screenshots/Forget%20Password.png" width="300">
+
+### 📸 splash & onBoarding
+<img src="screenshots/Splash%20Screen.png" width="300">
+<img src="screenshots/OnBoarding.png" width="300">
+<img src="screenshots/OnBoarding%20(1).png" width="300">
+<img src="screenshots/OnBoarding%20(2).png" width="300">
+<img src="screenshots/OnBoarding%20(3).png" width="300">
+<img src="screenshots/OnBoarding%20(4).png" width="300">
+<img src="screenshots/OnBoarding%20(5).png" width="300">
+
+
 
 ---
 
@@ -162,6 +166,33 @@ lib/
 ├── features/
 │ ├── auth/
 │ ├── home/
+|       ├── data/
+|       │   ├── datasources/
+|       │   │   └── home_remote_data_source.dart
+|       │   ├── models/
+|       │   │   └── movie_model.dart
+|       │   └── repositories/
+|       │       └── home_repository_impl.dart
+|       │
+|       ├── domain/
+|       │   ├── entities/
+|       │   │   └── movie_entity.dart
+|       │   ├── repositories/
+|       │   │   └── home_repository.dart
+|       │  └── usecases/
+|       │      └── get_movies_usecase.dart
+|       │
+|       ├── presentation/
+|       │  ├── blocs/
+|       │   │   ├── home_bloc.dart
+|       │   │   ├── home_event.dart
+|       │   │   └── home_state.dart
+|       │   ├── screens/
+|       │   │   └── home_screen.dart
+|       │   └── widgets/
+|       │       ├── movie_card.dart
+|       │       ├── movies_carousel.dart
+|       │     
 │ ├── browse/
 │ ├── details/
 │ ├── search/
@@ -210,6 +241,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 4️⃣ Run Project
 flutter run
+
 
 
 
